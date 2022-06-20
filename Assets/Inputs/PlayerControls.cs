@@ -72,7 +72,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""cb527004-9c3d-442f-9e47-bb69c4f95dce"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.9,max=1)"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,

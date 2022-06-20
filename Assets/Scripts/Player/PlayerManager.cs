@@ -30,8 +30,10 @@ public class PlayerManager : MonoBehaviour
         // Init variables component
         m_playerInput = GetComponent<PlayerInput>();
         
+        //Controller
         m_playerController.m_speedMovement = m_speedMovement;
         m_playerController.m_controls = m_playerInput;
+        m_playerController.InitInputAction();
     }
 
     private void Update()
