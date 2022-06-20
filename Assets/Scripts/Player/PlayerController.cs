@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //------------------------Public------------------------------//
+    
+    //--------------------------Controller----------------------------//
+    public float m_speedMovement = 10;
+    
+    //-------------------------Input System-----------------------------//
+    public InputAction m_movementActions;
+    public InputAction m_interactAction;
+    
+    //---------------------------Private---------------------------//
+    private Rigidbody2D m_rb;
+    
+    private void Awake()
     {
-        
+        m_rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DoUpdate()
     {
-        
+        Debug.Log(m_movementActions.ReadValue<Vector2>());
+        m_rb.MovePosition( m_rb.position + m_movementActions.ReadValue<Vector2>() * m_speedMovement * Time.deltaTime);
     }
 }
