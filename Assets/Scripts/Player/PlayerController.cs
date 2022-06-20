@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour
     public void DoUpdate()
     {
         m_rb.MovePosition( m_rb.position + m_controls.currentActionMap["Movement"].ReadValue<Vector2>() * m_speedMovement * Time.deltaTime);
-        //m_rb.MoveRotation( quaternion.Euler(new Vector3(0,0,m_controls.currentActionMap["Look"].ReadValue<Vector2>().y)));
-        transform.forward =new Vector3(0,0,m_controls.currentActionMap["Look"].ReadValue<Vector2>().y);
+        m_rb.MoveRotation( quaternion.Euler(new Vector3(0,0,Mathf.Atan2(-m_controls.currentActionMap["Look"].ReadValue<Vector2>().x, m_controls.currentActionMap["Look"].ReadValue<Vector2>().y) )));
+        
+        //transform.rotation = Quaternion.Euler(new Vector3(0,0,m_controls.currentActionMap["Look"].ReadValue<Vector2>().y));
+        //Debug.Log(m_controls.currentActionMap["Look"].ReadValue<Vector2>());
     }
 }
