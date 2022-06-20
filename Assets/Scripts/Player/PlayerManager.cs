@@ -6,7 +6,6 @@ public class PlayerManager : MonoBehaviour
     //------------------------------------------------------//
     
     //--------------------------Input System----------------------------//*
-    [SerializeField, Tooltip("Input Action Asset pour le movement des joueurs")] private InputActionAsset m_movementActions;
     
     //--------------------------Controller Variables----------------------------//
     [Header("Controller")] 
@@ -17,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerInteraction m_playerInteraction;
     private PlayerSkillsData m_playerSkillsData;
 
+
     private void Awake()
     {
         // Create Component
@@ -26,9 +26,6 @@ public class PlayerManager : MonoBehaviour
 
         // Init variables component
         m_playerController.m_speedMovement = m_speedMovement;
-        
-        m_playerController.m_movementActions = m_movementActions.FindAction("Movement");
-        m_playerController.m_interactAction = m_movementActions.FindAction("Interact");
     }
 
     private void Update()
