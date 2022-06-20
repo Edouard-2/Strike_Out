@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerManager : MonoBehaviour
 {
     //------------------------------------------------------//
     
     //--------------------------Input System----------------------------//*
+    [FormerlySerializedAs("m_controls")] [SerializeField, Tooltip("Player Input du joueur")] private PlayerInput m_playerInput;
     
     //--------------------------Controller Variables----------------------------//
     [Header("Controller")] 
@@ -23,9 +26,12 @@ public class PlayerManager : MonoBehaviour
         m_playerController = gameObject.AddComponent<PlayerController>();
         m_playerInteraction = gameObject.AddComponent<PlayerInteraction>();
         m_playerSkillsData = gameObject.AddComponent<PlayerSkillsData>();
-
+        
         // Init variables component
+        m_playerInput = GetComponent<PlayerInput>();
+        
         m_playerController.m_speedMovement = m_speedMovement;
+        m_playerController.m_controls = m_playerInput;
     }
 
     private void Update()
@@ -33,5 +39,10 @@ public class PlayerManager : MonoBehaviour
         m_playerController.DoUpdate();
         //m_playerInteraction.DoUpdate();
         //m_playerSkillsData.DoUpdate();
+    }
+
+    public void AddCameraAfterInstance(PlayerInput playerInput)
+    {
+        playerInput.camera = Camera.main;
     }
 }
