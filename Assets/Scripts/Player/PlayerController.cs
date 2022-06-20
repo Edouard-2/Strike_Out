@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private InputAction m_actionMovement;
     private InputAction m_actionLook;
     private Vector3 m_dirPlayer;
+    private float m_velocityAngle;
+    private float m_smoothTime = 0.1f;
     
     private void Awake()
     {
@@ -33,10 +35,11 @@ public class PlayerController : MonoBehaviour
     {
         m_rb.MovePosition( m_rb.position + m_actionMovement.ReadValue<Vector2>() * m_speedMovement * Time.deltaTime);
         
-        m_dirPlayer.z = Mathf.Atan2(-m_actionLook.ReadValue<Vector2>().x, m_actionLook.ReadValue<Vector2>().y);
+        float angle = Mathf.Atan2(-m_actionLook.ReadValue<Vector2>().x, m_actionLook.ReadValue<Vector2>().y) * Mathf.Rad2Deg;
+        m_dirPlayer.z =  Mathf.SmoothDampAngle(transform.eulerAngles.z, angle, ref m_velocityAngle, m_smoothTime);
         
-        if (m_dirPlayer.z == 0) return;
+        if (angle == 0) return;
         
-        m_rb.MoveRotation( quaternion.Euler(m_dirPlayer));
+        transform.rotation = Quaternion.Euler(m_dirPlayer);
     }
 }
