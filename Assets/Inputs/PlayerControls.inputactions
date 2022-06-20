@@ -103,6 +103,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "HoldBack",
+                    "type": "Button",
+                    "id": "6001c820-5f9d-48b4-b529-0c4995137d90",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Up",
                     "type": "Button",
                     "id": "0a42f785-711a-443f-ac18-ff3a3bd80da3",
@@ -146,7 +155,7 @@
                     "name": "",
                     "id": "c7f36c75-2bf7-4be7-922f-bf1fc26fa674",
                     "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Back",
@@ -157,7 +166,7 @@
                     "name": "",
                     "id": "79bc9f98-a474-4d7f-b3c5-517a27c61563",
                     "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Down",
@@ -168,7 +177,7 @@
                     "name": "",
                     "id": "1da47221-ad01-45f2-b570-deaf93b1957c",
                     "path": "<Gamepad>/leftStick/up",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Up",
@@ -179,10 +188,21 @@
                     "name": "",
                     "id": "2e6125cf-8c7d-4cf8-b463-bdd03b6cf18a",
                     "path": "<Gamepad>/start",
-                    "interactions": "",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Option",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "575a18bf-c7d8-4b54-a983-ef56f80b8168",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

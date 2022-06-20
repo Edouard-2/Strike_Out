@@ -125,6 +125,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""HoldBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""6001c820-5f9d-48b4-b529-0c4995137d90"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Up"",
                     ""type"": ""Button"",
                     ""id"": ""0a42f785-711a-443f-ac18-ff3a3bd80da3"",
@@ -168,7 +177,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""c7f36c75-2bf7-4be7-922f-bf1fc26fa674"",
                     ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Back"",
@@ -179,7 +188,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""79bc9f98-a474-4d7f-b3c5-517a27c61563"",
                     ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Down"",
@@ -190,7 +199,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""1da47221-ad01-45f2-b570-deaf93b1957c"",
                     ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Up"",
@@ -201,10 +210,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""2e6125cf-8c7d-4cf8-b463-bdd03b6cf18a"",
                     ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""575a18bf-c7d8-4b54-a983-ef56f80b8168"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -222,6 +242,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
         m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
+        m_UI_HoldBack = m_UI.FindAction("HoldBack", throwIfNotFound: true);
         m_UI_Up = m_UI.FindAction("Up", throwIfNotFound: true);
         m_UI_Down = m_UI.FindAction("Down", throwIfNotFound: true);
         m_UI_Option = m_UI.FindAction("Option", throwIfNotFound: true);
@@ -335,6 +356,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Select;
     private readonly InputAction m_UI_Back;
+    private readonly InputAction m_UI_HoldBack;
     private readonly InputAction m_UI_Up;
     private readonly InputAction m_UI_Down;
     private readonly InputAction m_UI_Option;
@@ -344,6 +366,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_UI_Select;
         public InputAction @Back => m_Wrapper.m_UI_Back;
+        public InputAction @HoldBack => m_Wrapper.m_UI_HoldBack;
         public InputAction @Up => m_Wrapper.m_UI_Up;
         public InputAction @Down => m_Wrapper.m_UI_Down;
         public InputAction @Option => m_Wrapper.m_UI_Option;
@@ -362,6 +385,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Back.started -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
                 @Back.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
                 @Back.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @HoldBack.started -= m_Wrapper.m_UIActionsCallbackInterface.OnHoldBack;
+                @HoldBack.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnHoldBack;
+                @HoldBack.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnHoldBack;
                 @Up.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
                 @Up.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
                 @Up.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
@@ -381,6 +407,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Back.started += instance.OnBack;
                 @Back.performed += instance.OnBack;
                 @Back.canceled += instance.OnBack;
+                @HoldBack.started += instance.OnHoldBack;
+                @HoldBack.performed += instance.OnHoldBack;
+                @HoldBack.canceled += instance.OnHoldBack;
                 @Up.started += instance.OnUp;
                 @Up.performed += instance.OnUp;
                 @Up.canceled += instance.OnUp;
@@ -404,6 +433,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnSelect(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+        void OnHoldBack(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
         void OnOption(InputAction.CallbackContext context);
