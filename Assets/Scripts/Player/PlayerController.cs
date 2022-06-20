@@ -14,17 +14,29 @@ public class PlayerController : MonoBehaviour
     
     //---------------------------Private---------------------------//
     private Rigidbody2D m_rb;
-
+    private InputAction m_actionMovement;
+    private InputAction m_actionLook;
+    private Vector3 m_dirPlayer;
     
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
     }
 
+    public void InitInputAction()
+    {
+        m_actionMovement = m_controls.currentActionMap["Movement"];
+        m_actionLook = m_controls.currentActionMap["Look"];
+    }
+
     public void DoUpdate()
     {
-        m_rb.MovePosition( m_rb.position + m_controls.currentActionMap["Movement"].ReadValue<Vector2>() * m_speedMovement * Time.deltaTime);
-        //m_rb.MoveRotation( quaternion.Euler(new Vector3(0,0,m_controls.currentActionMap["Look"].ReadValue<Vector2>().y)));
-        transform.forward =new Vector3(0,0,m_controls.currentActionMap["Look"].ReadValue<Vector2>().y);
+        m_rb.MovePosition( m_rb.position + m_actionMovement.ReadValue<Vector2>() * m_speedMovement * Time.deltaTime);
+        
+        m_dirPlayer.z = Mathf.Atan2(-m_actionLook.ReadValue<Vector2>().x, m_actionLook.ReadValue<Vector2>().y);
+        
+        if (m_dirPlayer.z == 0) return;
+        
+        m_rb.MoveRotation( quaternion.Euler(m_dirPlayer));
     }
 }
