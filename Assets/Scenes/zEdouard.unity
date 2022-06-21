@@ -465,18 +465,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1681755138815691075, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
-      propertyPath: m_layerPlayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681755138815691075, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
-      propertyPath: m_layerNoPlayer.m_Bits
-      value: 119
-      objectReference: {fileID: 0}
-    - target: {fileID: 1824467532849350151, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6996916850171803354, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -520,10 +508,6 @@ PrefabInstance:
     - target: {fileID: 6996916850171803354, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7398060907141022363, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
-      propertyPath: m_BodyType
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9207138376108693208, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
       propertyPath: m_Name
