@@ -1,5 +1,3 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,9 +12,12 @@ public class PlayerController : MonoBehaviour
     
     //---------------------------Private---------------------------//
     private Rigidbody2D m_rb;
+    
     private InputAction m_actionMovement;
     private InputAction m_actionLook;
+    
     private Vector3 m_dirPlayer;
+    
     private float m_velocityAngle;
     private float m_smoothTime = 0.1f;
     

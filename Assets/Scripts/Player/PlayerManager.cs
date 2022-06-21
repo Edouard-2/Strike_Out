@@ -5,10 +5,13 @@ using UnityEngine.Serialization;
 
 public class PlayerManager : MonoBehaviour
 {
-    //------------------------------------------------------//
-    
     //--------------------------Input System----------------------------//*
+    [Header("Player Input")] 
     [FormerlySerializedAs("m_controls")] [SerializeField, Tooltip("Player Input du joueur")] private PlayerInput m_playerInput;
+    
+    //--------------------------Layer Mask----------------------------//*
+    [Header("Layer")] 
+    [SerializeField, Tooltip("Layer de la ball")] private LayerMask m_layerBall;
     
     //--------------------------Controller Variables----------------------------//
     [Header("Controller")] 
@@ -18,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerController m_playerController;
     private PlayerInteraction m_playerInteraction;
     private PlayerSkillsData m_playerSkillsData;
+
 
 
     private void Awake()
@@ -34,17 +38,16 @@ public class PlayerManager : MonoBehaviour
         m_playerController.m_speedMovement = m_speedMovement;
         m_playerController.m_controls = m_playerInput;
         m_playerController.InitInputAction();
+        
+        //Interact
+        m_playerInteraction.m_layerBall = m_layerBall;
+        m_playerInteraction.m_controls = m_playerInput;
+        m_playerInteraction.InitInputAction();
     }
+    
 
     private void Update()
     {
         m_playerController.DoUpdate();
-        //m_playerInteraction.DoUpdate();
-        //m_playerSkillsData.DoUpdate();
-    }
-
-    public void AddCameraAfterInstance(PlayerInput playerInput)
-    {
-        playerInput.camera = Camera.main;
     }
 }
