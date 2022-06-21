@@ -17,6 +17,6 @@ public class SplashScreen : MonoBehaviour
     {
         // SceneManager qui nous envoi vers le menu
         Debug.Log("ndsk");
-        SceneManager.Instance.GoToScene(1);
+        SceneManager.Instance.GoToScene(2);
     }
 }
