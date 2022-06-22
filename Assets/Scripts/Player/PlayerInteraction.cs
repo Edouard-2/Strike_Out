@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     //---------------------------Player Input---------------------------//
     public PlayerInput m_controls;
+    public float m_timeHoldingMax = 0.5f;
 
     //---------------------------Layer---------------------------//
     public LayerMask m_layerBall;
@@ -22,14 +25,25 @@ public class PlayerInteraction : MonoBehaviour
     private float m_timePressed;
     
     private float m_timeHolding;
-    public float m_timeHoldingMax = 0.5f;
+    
     private bool m_hasCatched;
+    
     private Coroutine m_coroutineTrans;
+    
+    private InputAction.CallbackContext m_emptyCallback;
+
 
     public void InitInputAction()
     {
-        m_controls.currentActionMap["Interact"].started += context => StartPropulse();
-        m_controls.currentActionMap["Interact"].canceled += context => PropulseBall();
+        m_emptyCallback = new InputAction.CallbackContext();
+        m_controls.currentActionMap["Interact"].started += StartPropulse;
+        m_controls.currentActionMap["Interact"].canceled += PropulseBall;
+    }
+
+    private void OnDisable()
+    {
+        m_controls.currentActionMap["Interact"].started -= StartPropulse;
+        m_controls.currentActionMap["Interact"].canceled -= PropulseBall;
     }
 
     public bool HasCatched()
@@ -40,18 +54,21 @@ public class PlayerInteraction : MonoBehaviour
     /// <summary>
     /// Check if the player can propulse a ball
     /// </summary>
-    private void StartPropulse()
+    private void StartPropulse(InputAction.CallbackContext context)
     {
         if (m_currentBall == null) return;
-        
-        //m_collider.gameObject.SetActive(true);
-        
+
         m_hasCatched = true;
         m_currentBall.m_isCatched = true;
         
         m_currentBall.transform.SetParent(transform);
         m_currentBall.StopBall();
 
+        StartBallCoroutines();
+    }
+
+    private void StartBallCoroutines()
+    {
         //Transition de la ball vers le point de lancement
         if(m_coroutineTrans == null) m_coroutineTrans = StartCoroutine(TransBallInFront());
         
@@ -68,8 +85,6 @@ public class PlayerInteraction : MonoBehaviour
             m_currentBall.transform.position = Vector2.Lerp(m_currentBall.transform.position, transform.position + transform.up * 2, time * 5);
             yield return null;
         }
-        
-        Debug.Log("Trans");
     }
 
     IEnumerator PropulseIfHoldIsToLong()
@@ -82,30 +97,20 @@ public class PlayerInteraction : MonoBehaviour
             yield return null;
         }
         
-        m_spriteRenderer.size = Vector2.zero;
-        
-        Debug.Log("Propulse If Hold IsToLong");
-        
-        if (m_hasCatched) PropulseBall();
+        if (m_hasCatched) PropulseBall(m_emptyCallback);
     }
     
     /// <summary>
     /// Propulse the ball after released input
     /// </summary>
-    private void PropulseBall()
+    private void PropulseBall(InputAction.CallbackContext context)
     {
         if (!m_hasCatched) return;
         m_hasCatched = false;
         
         m_spriteRenderer.size = Vector2.zero;
         
-        if(m_coroutineHold != null) StopCoroutine(m_coroutineHold);
-        if(m_coroutineTrans != null) StopCoroutine(m_coroutineTrans);
-        
-        //m_collider.gameObject.SetActive(false);
-        
-        m_coroutineHold = null;
-        m_coroutineTrans = null;
+        StopBallCoroutines();
         
         m_currentBall.m_isCatched = false;
         
@@ -115,6 +120,15 @@ public class PlayerInteraction : MonoBehaviour
         m_currentBall = null;
     }
 
+    private void StopBallCoroutines()
+    {
+        if(m_coroutineHold != null) StopCoroutine(m_coroutineHold);
+        if(m_coroutineTrans != null) StopCoroutine(m_coroutineTrans);
+        
+        m_coroutineHold = null;
+        m_coroutineTrans = null;
+    }
+    
     /// <summary>
     /// Verify if the Game object is in the layer Ball
     /// </summary>

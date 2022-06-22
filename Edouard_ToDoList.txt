@@ -1,2 +1,2 @@
-- ball et les deux camps
-- Shake camera (récup ball, tout rebond)
+- Spawn personnage dans un endroit
+- spawn ball dans des endroits random + après les joueurs
