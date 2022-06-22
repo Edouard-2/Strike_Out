@@ -98,7 +98,7 @@ public class SceneManager : Singleton<SceneManager>
             yield return null;
         }
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(2f);
         m_loaderAnimator.SetTrigger(m_depopAnimation);
         // On fait la transition
         EndTransition();
