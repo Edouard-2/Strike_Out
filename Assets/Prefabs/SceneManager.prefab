@@ -522,4 +522,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_dontdestroyOnLoad: 1
   m_blackTransitionAnimator: {fileID: 1973635397}
-  m_loaderAnimator: {fileID: 0}
+  m_loaderAnimator: {fileID: 1423769934}
