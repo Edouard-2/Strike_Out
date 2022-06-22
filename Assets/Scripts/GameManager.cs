@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField, Tooltip("Prefab de la ball")] private GameObject m_ballPrefab;
     
     //--------------------------Private----------------------------//
-    private int m_indexSpwan;
+    private int m_indexSpawn;
 
     public void OnPlayerJoin()
     {
@@ -27,17 +27,17 @@ public class GameManager : Singleton<GameManager>
         
         Debug.Log(m_listPlayer.Count);
         
-        m_listPlayer[m_indexSpwan].transform.position = m_listTransform[m_indexSpwan].position;
-        m_listPlayer[m_indexSpwan].transform.rotation = m_listTransform[m_indexSpwan].rotation;
+        m_listPlayer[m_indexSpawn].transform.position = m_listTransform[m_indexSpawn].position;
+        m_listPlayer[m_indexSpawn].transform.rotation = m_listTransform[m_indexSpawn].rotation;
 
-        m_listPlayer[m_indexSpwan].transform.localScale = Vector2.zero;
+        m_listPlayer[m_indexSpawn].transform.localScale = Vector2.zero;
         
-        m_listReady[m_indexSpwan].StartButton();
+        m_listReady[m_indexSpawn].StartButton();
         
-        StartCoroutine(WaitForPlayerSpawn(m_listPlayer[m_indexSpwan].transform.gameObject));
+        StartCoroutine(WaitForPlayerSpawn(m_listPlayer[m_indexSpawn].transform.gameObject));
 
-        m_indexSpwan++;
-        if (m_indexSpwan > 1) StartCoroutine(SpawnBall());
+        m_indexSpawn++;
+        if (m_indexSpawn > 1) StartCoroutine(SpawnBall());
     }
 
     public void AddPlayer(Transform player)

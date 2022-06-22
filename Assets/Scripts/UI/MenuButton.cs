@@ -28,7 +28,6 @@ public class MenuButton : MonoBehaviour
         if (!SceneManager.Instance.CanPlay) return;
         ResetAllTrigger();
         m_buttonAnimator.SetTrigger(m_unselectedAnimation);
-        Interact();
     }
     public void Pressed()
     {
@@ -43,12 +42,12 @@ public class MenuButton : MonoBehaviour
         ResetAllTrigger();
         SoundManager.Instance.PlayUIButtonRelease();
         m_buttonAnimator.SetTrigger(m_releasedAnimation);
+        Interact();
     }
 
-    private void Interact()
+    protected virtual void Interact()
     {
         if (!SceneManager.Instance.CanPlay) return;
-        Debug.Log(gameObject.name);
     }
     private void ResetAllTrigger()
     {
