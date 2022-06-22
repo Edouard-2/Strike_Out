@@ -8,7 +8,8 @@ public class PlayerManager : MonoBehaviour
     //--------------------------Components----------------------------//*
     [Header("Components")] 
     [FormerlySerializedAs("m_controls")] [SerializeField, Tooltip("Player Input du joueur")] private PlayerInput m_playerInput;
-    [SerializeField, Tooltip("Circle collider 2D du joueur")] private CircleCollider2D m_collider;
+    [SerializeField, Tooltip("Circle collider 2D du joueur")] private BoxCollider2D m_collider;
+    [SerializeField, Tooltip("Sprite Renderer du feedback grab")] private SpriteRenderer m_spriteRenderer;
     
     //--------------------------Layer Mask----------------------------//*
     [Header("Layer")] 
@@ -18,7 +19,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Controller")] 
     [SerializeField, Tooltip("Vitesse des mouvements du joueur")] private float m_speedMovement = 10;
     
-    //--------------------------Controller Variables----------------------------//
+    //--------------------------Interaction Variables----------------------------//
     [Header("Interaction")] 
     [SerializeField, Tooltip("Vitesse des mouvements du joueur")] private float m_timeHoldingMax = 1f;
     
@@ -46,6 +47,7 @@ public class PlayerManager : MonoBehaviour
         m_playerController.InitInputAction();
         
         //Interact
+        m_playerInteraction.m_spriteRenderer = m_spriteRenderer;
         m_playerInteraction.m_collider = m_collider;
         m_playerInteraction.m_timeHoldingMax = m_timeHoldingMax;
         m_playerInteraction.m_layerBall = m_layerBall;
