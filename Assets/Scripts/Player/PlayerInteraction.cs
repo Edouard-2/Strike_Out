@@ -11,7 +11,8 @@ public class PlayerInteraction : MonoBehaviour
     public LayerMask m_layerBall;
     
     //---------------------------Component---------------------------//
-    public CircleCollider2D m_collider;
+    public BoxCollider2D m_collider;
+    public SpriteRenderer m_spriteRenderer;
 
     //---------------------------Private---------------------------//
     private BallController m_currentBall;
@@ -20,11 +21,10 @@ public class PlayerInteraction : MonoBehaviour
     
     private float m_timePressed;
     
-    private float m_time;
-    
     private float m_timeHolding;
     public float m_timeHoldingMax = 0.5f;
     private bool m_hasCatched;
+    private Coroutine m_coroutineTrans;
 
     public void InitInputAction()
     {
@@ -44,33 +44,49 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (m_currentBall == null) return;
         
+        //m_collider.gameObject.SetActive(true);
+        
         m_hasCatched = true;
-        Debug.Log(m_currentBall);
-        m_timePressed = Time.time;
-
-        //m_collider.enabled = false;
+        m_currentBall.m_isCatched = true;
         
         m_currentBall.transform.SetParent(transform);
-        m_currentBall.transform.position = transform.position + transform.up * 2;
         m_currentBall.StopBall();
 
-        m_time = 0;
-        //if(m_coroutineHold == null) m_coroutineHold = StartCoroutine(PropulseIfHoldIsToLong());
+        //Transition de la ball vers le point de lancement
+        if(m_coroutineTrans == null) m_coroutineTrans = StartCoroutine(TransBallInFront());
+        
+        //Faire lacher la balle si on la garde trop longtemps
+        if(m_coroutineHold == null) m_coroutineHold = StartCoroutine(PropulseIfHoldIsToLong());
+    }
+
+    IEnumerator TransBallInFront()
+    {
+        float time = 0;
+        while (time < 0.2f)
+        {
+            time += Time.deltaTime;
+            m_currentBall.transform.position = Vector2.Lerp(m_currentBall.transform.position, transform.position + transform.up * 2, time * 5);
+            yield return null;
+        }
+        
+        Debug.Log("Trans");
     }
 
     IEnumerator PropulseIfHoldIsToLong()
     {
-        while (m_time < m_timeHoldingMax)
+        float time = 0;
+        while (time < m_timeHoldingMax)
         {
-            m_time += Time.deltaTime;
+            time += Time.deltaTime;
+            m_spriteRenderer.size += Vector2.one * Time.deltaTime / m_timeHoldingMax;
             yield return null;
         }
         
-        //Reset Value
-        m_time = 0;
-        m_coroutineHold = null;
+        m_spriteRenderer.size = Vector2.zero;
+        
         Debug.Log("Propulse If Hold IsToLong");
-        PropulseBall();
+        
+        if (m_hasCatched) PropulseBall();
     }
     
     /// <summary>
@@ -80,16 +96,21 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (!m_hasCatched) return;
         m_hasCatched = false;
+        
+        m_spriteRenderer.size = Vector2.zero;
+        
         if(m_coroutineHold != null) StopCoroutine(m_coroutineHold);
+        if(m_coroutineTrans != null) StopCoroutine(m_coroutineTrans);
         
-        Debug.Log(m_currentBall);
+        //m_collider.gameObject.SetActive(false);
+        
+        m_coroutineHold = null;
+        m_coroutineTrans = null;
+        
+        m_currentBall.m_isCatched = false;
+        
         m_currentBall.transform.SetParent(null);
-        
-        m_timeHolding = Time.time - m_timePressed + 1;
-        Debug.Log(m_timeHolding);
-        if (m_timeHolding > m_timeHoldingMax) m_timeHolding = m_timeHoldingMax;
-
-        m_currentBall.Propulse(transform.up, m_timeHolding);
+        m_currentBall.Propulse(transform.up);
         
         m_currentBall = null;
     }
@@ -103,8 +124,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         Debug.Log("Verifier si le game manager est en play");
 
+        //Si c'est un autre balle qui arrive
         if (m_currentBall != null && go == m_currentBall.gameObject) return false;
 
+        //Si c'est un obj dans le layer balle
         return (m_layerBall.value & (1 << go.layer)) > 0;
     }
 
@@ -113,11 +136,12 @@ public class PlayerInteraction : MonoBehaviour
         //Debug.Log("verif si ball"+!VerifyIfBall(col.gameObject));
         if (!VerifyIfBall(col.gameObject)) return;
 
-        m_currentBall = col.gameObject.GetComponent<BallController>();
+        m_currentBall = col.gameObject.GetComponent<BallController>().Able();
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
+        if (m_hasCatched) return;
         m_currentBall = null;
     }
 }
