@@ -6,11 +6,16 @@ public class BallController : MonoBehaviour
     
     //---------------------------Components---------------------------//
     public Rigidbody2D m_rb;
+    public CircleCollider2D m_collider;
     
     //---------------------------Private---------------------------//
-    private float m_velocityMultiplier = 5f;
+    private float m_velocityMultiplier = 2f;
     
-    
+    private float m_stepSpeed = 0.1f;
+    private float m_speedBall = 1f;
+    private float m_speedBallMax = 14;
+
+
     /// <summary>
     /// Change the direction of the ball when it's hit
     /// </summary>
@@ -18,7 +23,7 @@ public class BallController : MonoBehaviour
     public void HitDirection(Vector3 dir)
     {
         //Changer la direction de la balle
-        m_rb.velocity = dir;
+        m_rb.velocity = dir * m_speedBall ;
     }
 
     /// <summary>
@@ -48,11 +53,22 @@ public class BallController : MonoBehaviour
     /// <param name="timeHolding">Time between the pressed and released of input</param>
     private void AddVelocity(Vector3 dir, float timeHolding)
     {
-        m_rb.velocity = dir * m_velocityMultiplier * timeHolding;
+        m_rb.velocity = dir * m_velocityMultiplier * m_speedBall;
+        AddSpeedBall(timeHolding);
     }
-    
-    private void OnCollisionEnter2D(Collision2D col)
+
+    private void FixedUpdate()
     {
-        HitDirection(col.transform.up);
+        m_rb.velocity = m_rb.velocity.normalized * m_speedBall;
+    }
+
+    private void AddSpeedBall(float multiplier)
+    {
+        if(m_speedBall == m_speedBallMax)return;
+        
+        m_speedBall *= m_velocityMultiplier * multiplier;
+        m_speedBall += m_stepSpeed;
+
+        if (m_speedBall > m_speedBallMax) m_speedBall = m_speedBallMax;
     }
 }
