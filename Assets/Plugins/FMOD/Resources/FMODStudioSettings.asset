@@ -426,10 +426,10 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: Assets/Plugins/FMOD Project/FMOD_StrikeOut/FMOD_StrikeOut.fspro
-  sourceBankPath: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build
+  sourceProjectPath: 
+  sourceBankPath: 
   SourceBankPathUnformatted: 
-  BankRefreshCooldown: 1
+  BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -449,8 +449,7 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks:
-  - Master
+  MasterBanks: []
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264

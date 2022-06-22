@@ -62,7 +62,7 @@ public class BallController : MonoBehaviour
     public void StopBall()
     {
         ShakeCamera();
-        ZoomCamera(9.3f, 0.5f);
+        ZoomCamera(4.8f, 0.5f);
         transform.localScale = Vector2.one * 1.2f;
         m_rb.velocity = Vector2.zero;
     }
@@ -74,7 +74,7 @@ public class BallController : MonoBehaviour
     /// <param name="timeHolding">Time between the pressed and released of input</param>
     public void Propulse(Vector3 dir)
     {
-        ZoomCamera(10, 0.07f);
+        ZoomCamera(5, 0.07f);
         transform.localScale = Vector2.one / 1.2f;
         AddVelocity(dir);
     }
@@ -138,7 +138,7 @@ public class BallController : MonoBehaviour
     {
         if (m_coroutineShake == null)
         {
-            float valueShake = 2 / 7.5f * m_speedBall;
+            float valueShake = 1/ 7.5f * m_speedBall;
             m_camera.transform.DOShakeRotation(m_durationShake,valueShake,(int)valueShake,valueShake);
             m_coroutineShake = StartCoroutine(StopShakeCamera());
         }

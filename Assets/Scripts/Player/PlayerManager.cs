@@ -32,6 +32,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.AddPlayer(transform);
+        
         // Create Component
         m_playerController = gameObject.AddComponent<PlayerController>();
         m_playerInteraction = gameObject.AddComponent<PlayerInteraction>();
