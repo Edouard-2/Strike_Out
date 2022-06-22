@@ -25,6 +25,8 @@ public class GameManager : Singleton<GameManager>
     {
         yield return new WaitForSeconds(0.01f);
         
+        if (m_listPlayer.Count == 0) yield break;
+        
         Debug.Log(m_listPlayer.Count);
         
         m_listPlayer[m_indexSpawn].transform.position = m_listTransform[m_indexSpawn].position;
