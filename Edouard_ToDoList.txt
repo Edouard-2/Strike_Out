@@ -1,4 +1,2 @@
-- quand au dessus de x temps lancer la balle après input pressed
-- Mettre sur le centre devant du perso (avec trans)
-- faire les rebond qunad trigger 
-(circle collider plus grand qui fait lancer un ray cast pour avoir les info: point, dir ball, collider.transform.up)
+- ball et les deux camps
+- Shake camera (récup ball, tout rebond)

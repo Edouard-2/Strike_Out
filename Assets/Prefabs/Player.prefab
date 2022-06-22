@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 1469439378231364415}
   - component: {fileID: 1838116937195917310}
   m_Layer: 7
-  m_Name: Square
+  m_Name: DirMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerInput: {fileID: 997581302114757137}
-  m_collider: {fileID: 7518920984692440859}
+  m_collider: {fileID: 0}
   m_spriteRenderer: {fileID: 2225749241034370409}
   m_layerBall:
     serializedVersion: 2

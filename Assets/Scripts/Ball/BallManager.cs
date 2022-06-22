@@ -25,6 +25,6 @@ public class BallManager : MonoBehaviour
 
     private void Start()
     {
-        m_ballController.HitDirection(transform.up);
+        //m_ballController.HitDirection(transform.up);
     }
 }

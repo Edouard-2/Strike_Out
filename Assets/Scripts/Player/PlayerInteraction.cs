@@ -44,7 +44,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (m_currentBall == null) return;
         
-        //m_collider.enabled = false;
+        //m_collider.gameObject.SetActive(true);
         
         m_hasCatched = true;
         m_currentBall.m_isCatched = true;
@@ -52,7 +52,10 @@ public class PlayerInteraction : MonoBehaviour
         m_currentBall.transform.SetParent(transform);
         m_currentBall.StopBall();
 
+        //Transition de la ball vers le point de lancement
         if(m_coroutineTrans == null) m_coroutineTrans = StartCoroutine(TransBallInFront());
+        
+        //Faire lacher la balle si on la garde trop longtemps
         if(m_coroutineHold == null) m_coroutineHold = StartCoroutine(PropulseIfHoldIsToLong());
     }
 
@@ -94,10 +97,12 @@ public class PlayerInteraction : MonoBehaviour
         if (!m_hasCatched) return;
         m_hasCatched = false;
         
+        m_spriteRenderer.size = Vector2.zero;
+        
         if(m_coroutineHold != null) StopCoroutine(m_coroutineHold);
         if(m_coroutineTrans != null) StopCoroutine(m_coroutineTrans);
         
-        //m_collider.enabled = true;
+        //m_collider.gameObject.SetActive(false);
         
         m_coroutineHold = null;
         m_coroutineTrans = null;
