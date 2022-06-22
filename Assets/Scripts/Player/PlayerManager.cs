@@ -27,13 +27,9 @@ public class PlayerManager : MonoBehaviour
     private PlayerController m_playerController;
     private PlayerInteraction m_playerInteraction;
     private PlayerSkillsData m_playerSkillsData;
-
-
-
+    
     private void Awake()
     {
-        GameManager.Instance.AddPlayer(transform);
-        
         // Create Component
         m_playerController = gameObject.AddComponent<PlayerController>();
         m_playerInteraction = gameObject.AddComponent<PlayerInteraction>();
@@ -55,6 +51,8 @@ public class PlayerManager : MonoBehaviour
         m_playerInteraction.m_layerBall = m_layerBall;
         m_playerInteraction.m_controls = m_playerInput;
         m_playerInteraction.InitInputAction();
+        
+        GameManager.Instance.AddPlayer(transform);
     }
     
 

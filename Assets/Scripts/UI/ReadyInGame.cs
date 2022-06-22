@@ -15,9 +15,8 @@ public class ReadyInGame : MonoBehaviour
     
     public void StartButton()
     {
-        //if (!SceneManager.Instance.CanPlay) return;
         Debug.Log("StartButton");
-        //SoundManager.Instance.PlayUIButtonPress();
+        SoundManager.Instance.PlayUIButtonPress();
         m_animatorList?.ForEach(a => a?.SetTrigger(m_pressedAnimation));
         StartCoroutine(Select_Canceled());
     }
@@ -25,7 +24,7 @@ public class ReadyInGame : MonoBehaviour
     private IEnumerator Select_Canceled()
     {
         yield return new WaitForSeconds(0.1f);
-        //SoundManager.Instance.PlayUIButtonRelease();
+        SoundManager.Instance.PlayUIButtonRelease();
         m_animatorList?.ForEach(a => a?.SetTrigger(m_releasedAnimation));
         // Lancer l'animation de fade out
         StartCoroutine(FadeOut());

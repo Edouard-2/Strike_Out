@@ -7,13 +7,20 @@ public class GameManager : Singleton<GameManager>
 {
     //--------------------------Player----------------------------//
     private List<Transform> m_listPlayer = new List<Transform>();
-    [SerializeField, Tooltip("Position des différents joueurs au spawn")] private List<Transform> m_listTransform;
-    [SerializeField, Tooltip("Texte Ready pout lancer le jeu")] private List<ReadyInGame> m_listReady;
+
+    [SerializeField, Tooltip("Position des différents joueurs au spawn")]
+    private List<Transform> m_listTransform;
+
+    [SerializeField, Tooltip("Texte Ready pout lancer le jeu")]
+    private List<ReadyInGame> m_listReady;
 
     //--------------------------Ball----------------------------//
-    [SerializeField, Tooltip("Position de spawn de la balle")] private List<Transform> m_spawnBall;
-    [SerializeField, Tooltip("Prefab de la ball")] private GameObject m_ballPrefab;
-    
+    [SerializeField, Tooltip("Position de spawn de la balle")]
+    private List<Transform> m_spawnBall;
+
+    [SerializeField, Tooltip("Prefab de la ball")]
+    private GameObject m_ballPrefab;
+
     //--------------------------Private----------------------------//
     private int m_indexSpawn;
 
@@ -21,21 +28,46 @@ public class GameManager : Singleton<GameManager>
     {
         StartCoroutine(DOPlayerJoin());
     }
+
     IEnumerator DOPlayerJoin()
     {
         yield return new WaitForSeconds(0.01f);
-        
-        if (m_listPlayer.Count == 0) yield break;
-        
+
+        if (m_listPlayer.Count == 0)
+        {
+            SceneManager.Instance.AblePlayerInput(false);
+            yield break;
+        }
+
+        if (m_listPlayer.Count + m_indexSpawn == 4)
+        {
+            SceneManager.Instance.AblePlayerInput(true);
+            yield break;
+        }
+
+        if (!SceneManager.Instance.CanPlay)
+        {
+            if (m_listPlayer.Count > 0)
+            {
+                foreach (Transform transform in m_listPlayer)
+                {
+                    Destroy(transform.gameObject);
+                }
+
+                m_listPlayer = new List<Transform>();
+            }
+            yield break;
+        }
+
         Debug.Log(m_listPlayer.Count);
-        
+
         m_listPlayer[m_indexSpawn].transform.position = m_listTransform[m_indexSpawn].position;
         m_listPlayer[m_indexSpawn].transform.rotation = m_listTransform[m_indexSpawn].rotation;
 
         m_listPlayer[m_indexSpawn].transform.localScale = Vector2.zero;
-        
+
         m_listReady[m_indexSpawn].StartButton();
-        
+
         StartCoroutine(WaitForPlayerSpawn(m_listPlayer[m_indexSpawn].transform.gameObject));
 
         m_indexSpawn++;
@@ -50,7 +82,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator SpawnBall()
     {
         yield return new WaitForSeconds(2.1f);
-        GameObject go = Instantiate(m_ballPrefab, m_spawnBall[Random.Range(0,2)].position, Quaternion.identity);
+        GameObject go = Instantiate(m_ballPrefab, m_spawnBall[Random.Range(0, 2)].position, Quaternion.identity);
         StartCoroutine(SpawnGameObjectToSize(go));
     }
 
@@ -59,7 +91,7 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(1.6f);
         StartCoroutine(SpawnGameObjectToSize(go));
     }
-    
+
     /// <summary>
     /// Spawn a GameObject with a lerp between scale 0 and 1
     /// </summary>
@@ -68,7 +100,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator SpawnGameObjectToSize(GameObject go)
     {
         float time = 0;
-        
+
         go.transform.localScale = Vector2.zero;
         Vector2 initScale = go.transform.localScale;
 
@@ -78,6 +110,7 @@ public class GameManager : Singleton<GameManager>
             go.transform.localScale = Vector2.Lerp(initScale, Vector2.one, time / 0.5f);
             yield return null;
         }
+
         go.transform.localScale = Vector2.one;
     }
 
