@@ -1,0 +1,51 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class UIManager : MonoBehaviour
+{
+    protected PlayerInput m_playerInput;
+    private void OnEnable()
+    {
+        m_playerInput = SceneManager.Instance.GetComponent<PlayerInput>();
+        
+        m_playerInput.currentActionMap["Select"].started += Select_Started;
+        m_playerInput.currentActionMap["Select"].canceled += Select_Canceled;
+        m_playerInput.currentActionMap["Back"].started += Back_Started;
+        m_playerInput.currentActionMap["Back"].canceled += Back_Canceled;
+        m_playerInput.currentActionMap["HoldBack"].started += HoldBack_Started;
+        m_playerInput.currentActionMap["HoldBack"].canceled += HoldBack_Canceled;
+        m_playerInput.currentActionMap["Up"].started += Up_Started;
+        m_playerInput.currentActionMap["Up"].started += Up_Canceled;
+        m_playerInput.currentActionMap["Down"].canceled += Down_Started;
+        m_playerInput.currentActionMap["Down"].canceled += Down_Canceled;
+        m_playerInput.currentActionMap["Option"].canceled += Option_Started;
+        m_playerInput.currentActionMap["Option"].canceled += Option_Canceled;
+    }
+    private void OnDisable()
+    {
+        m_playerInput.currentActionMap["Select"].started -= Select_Started;
+        m_playerInput.currentActionMap["Select"].canceled -= Select_Canceled;
+        m_playerInput.currentActionMap["Back"].started -= Back_Started;
+        m_playerInput.currentActionMap["Back"].canceled -= Back_Canceled;
+        m_playerInput.currentActionMap["HoldBack"].started -= HoldBack_Started;
+        m_playerInput.currentActionMap["HoldBack"].canceled -= HoldBack_Canceled;
+        m_playerInput.currentActionMap["Up"].started -= Up_Started;
+        m_playerInput.currentActionMap["Up"].started -= Up_Canceled;
+        m_playerInput.currentActionMap["Down"].canceled -= Down_Started;
+        m_playerInput.currentActionMap["Down"].canceled -= Down_Canceled;
+        m_playerInput.currentActionMap["Option"].canceled -= Option_Started;
+        m_playerInput.currentActionMap["Option"].canceled -= Option_Canceled;
+    }
+    protected virtual void Select_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void Select_Canceled(InputAction.CallbackContext ctx) { }
+    protected virtual void Back_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void Back_Canceled(InputAction.CallbackContext ctx) { }
+    protected virtual void HoldBack_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void HoldBack_Canceled(InputAction.CallbackContext ctx) { }
+    protected virtual void Up_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void Up_Canceled(InputAction.CallbackContext ctx) { }
+    protected virtual void Down_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void Down_Canceled(InputAction.CallbackContext ctx) { }
+    protected virtual void Option_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void Option_Canceled(InputAction.CallbackContext ctx) { }
+}

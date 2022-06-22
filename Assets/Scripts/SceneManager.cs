@@ -21,6 +21,9 @@ public class SceneManager : Singleton<SceneManager>
     private int m_depopAnimation = Animator.StringToHash("Depop");
 
     private bool m_onChange = false;
+    
+    private bool m_canPlay = true;
+    public bool CanPlay => m_canPlay;
 
     private void Awake()
     {
@@ -55,6 +58,14 @@ public class SceneManager : Singleton<SceneManager>
         m_blackTransitionAnimator.SetTrigger(m_openAnimation);
         
         m_onChange = false;
+        StartCoroutine(PlayAccess());
+    }
+
+    IEnumerator PlayAccess()
+    {
+        Debug.Log(GetTimeCurrentAnim());
+        yield return new WaitForSeconds(GetTimeCurrentAnim() * 1.5f);
+        m_canPlay = true;
     }
     
     IEnumerator UnloadAsync(int buildIndex)
@@ -65,12 +76,11 @@ public class SceneManager : Singleton<SceneManager>
         // On décharge la scène
         if (m_idCurrentScene > 0)
         {
-            float seconds = 1f;
-            foreach (var animatorClipInfo in m_blackTransitionAnimator.GetCurrentAnimatorClipInfo(0))
-            {
-                seconds = animatorClipInfo.clip.length;
-            }
-            yield return new WaitForSeconds(seconds);
+            yield return new WaitForSeconds(GetTimeCurrentAnim());
+            
+            // Le joueur ne peut plus appuyer sur les inputs
+            m_canPlay = false;
+            
             AsyncOperation asynOp = UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(m_idCurrentScene);
             m_loaderAnimator.SetTrigger(m_popAnimation);
             // On attend que le déchargement soit fait
@@ -85,8 +95,7 @@ public class SceneManager : Singleton<SceneManager>
         // On charge la scène
         StartCoroutine(LoadAsync(buildIndex));
     }
-    
-    
+
     IEnumerator LoadAsync(int buildIndex)
     {
         // On charge la scène
@@ -102,6 +111,17 @@ public class SceneManager : Singleton<SceneManager>
         m_loaderAnimator.SetTrigger(m_depopAnimation);
         // On fait la transition
         EndTransition();
+    }
+
+    private float GetTimeCurrentAnim()
+    {
+        float seconds = 1f;
+        foreach (var animatorClipInfo in m_blackTransitionAnimator.GetCurrentAnimatorClipInfo(0))
+        {
+            seconds = animatorClipInfo.clip.length;
+        }
+
+        return seconds;
     }
     protected override string GetSingletonName()
     {
