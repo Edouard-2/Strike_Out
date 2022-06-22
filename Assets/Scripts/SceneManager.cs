@@ -63,7 +63,6 @@ public class SceneManager : Singleton<SceneManager>
 
     IEnumerator PlayAccess()
     {
-        Debug.Log(GetTimeCurrentAnim());
         yield return new WaitForSeconds(GetTimeCurrentAnim() * 1.5f);
         m_canPlay = true;
     }
@@ -107,7 +106,7 @@ public class SceneManager : Singleton<SceneManager>
             yield return null;
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         m_loaderAnimator.SetTrigger(m_depopAnimation);
         // On fait la transition
         EndTransition();
