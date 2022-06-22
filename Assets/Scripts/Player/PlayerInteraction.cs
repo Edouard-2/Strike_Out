@@ -42,6 +42,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnDisable()
     {
+        if (m_controls == null || m_controls.currentActionMap == null) return;
         m_controls.currentActionMap["Interact"].started -= StartPropulse;
         m_controls.currentActionMap["Interact"].canceled -= PropulseBall;
     }

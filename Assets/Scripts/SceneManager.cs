@@ -23,10 +23,13 @@ public class SceneManager : Singleton<SceneManager>
     private bool m_onChange = false;
     
     private bool m_canPlay = true;
+    
+    private PlayerInput m_playerInput;
     public bool CanPlay => m_canPlay;
 
     private void Awake()
     {
+        m_playerInput = GetComponent<PlayerInput>();
         m_nameCurrentScene = UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1).name;
         m_idCurrentScene = 1;
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
@@ -125,5 +128,10 @@ public class SceneManager : Singleton<SceneManager>
     protected override string GetSingletonName()
     {
         return "SceneManager";
+    }
+
+    public void AblePlayerInput(bool value)
+    {
+        m_playerInput.enabled = value;
     }
 }

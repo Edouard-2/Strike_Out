@@ -1,2 +1,0 @@
-- Spawn personnage dans un endroit
-- spawn ball dans des endroits random + après les joueurs
