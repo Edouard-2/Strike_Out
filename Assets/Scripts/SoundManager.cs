@@ -8,6 +8,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField, Tooltip("Theme's music")] private StudioEventEmitter m_themeMusic;
     [SerializeField, Tooltip("UI Button Press sound")] private StudioEventEmitter m_uiButtonPress;
     [SerializeField, Tooltip("UI Button Release sound")] private StudioEventEmitter m_uiButtonRelease;
+    [SerializeField, Tooltip("UI Button Select sound")] private StudioEventEmitter m_uiButtonSelect;
     private void Start()
     {
         PlayMusic();
@@ -26,6 +27,11 @@ public class SoundManager : Singleton<SoundManager>
     {
         if(m_uiButtonRelease.IsPlaying()) m_uiButtonRelease.Stop();
         m_uiButtonRelease.Play();
+    }
+    public void PlayUIButtonSelect()
+    {
+        if(m_uiButtonSelect.IsPlaying()) m_uiButtonSelect.Stop();
+        m_uiButtonSelect.Play();
     }
 
     protected override string GetSingletonName()

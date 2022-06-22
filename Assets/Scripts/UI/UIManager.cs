@@ -15,10 +15,10 @@ public class UIManager : MonoBehaviour
         m_playerInput.currentActionMap["HoldBack"].started += HoldBack_Started;
         m_playerInput.currentActionMap["HoldBack"].canceled += HoldBack_Canceled;
         m_playerInput.currentActionMap["Up"].started += Up_Started;
-        m_playerInput.currentActionMap["Up"].started += Up_Canceled;
-        m_playerInput.currentActionMap["Down"].canceled += Down_Started;
+        m_playerInput.currentActionMap["Up"].canceled += Up_Canceled;
+        m_playerInput.currentActionMap["Down"].started += Down_Started;
         m_playerInput.currentActionMap["Down"].canceled += Down_Canceled;
-        m_playerInput.currentActionMap["Option"].canceled += Option_Started;
+        m_playerInput.currentActionMap["Option"].started += Option_Started;
         m_playerInput.currentActionMap["Option"].canceled += Option_Canceled;
     }
     private void OnDisable()
@@ -30,10 +30,10 @@ public class UIManager : MonoBehaviour
         m_playerInput.currentActionMap["HoldBack"].started -= HoldBack_Started;
         m_playerInput.currentActionMap["HoldBack"].canceled -= HoldBack_Canceled;
         m_playerInput.currentActionMap["Up"].started -= Up_Started;
-        m_playerInput.currentActionMap["Up"].started -= Up_Canceled;
-        m_playerInput.currentActionMap["Down"].canceled -= Down_Started;
+        m_playerInput.currentActionMap["Up"].canceled -= Up_Canceled;
+        m_playerInput.currentActionMap["Down"].started -= Down_Started;
         m_playerInput.currentActionMap["Down"].canceled -= Down_Canceled;
-        m_playerInput.currentActionMap["Option"].canceled -= Option_Started;
+        m_playerInput.currentActionMap["Option"].started -= Option_Started;
         m_playerInput.currentActionMap["Option"].canceled -= Option_Canceled;
     }
     protected virtual void Select_Started(InputAction.CallbackContext ctx) { }

@@ -5,42 +5,36 @@ using UnityEngine.InputSystem;
 
 public class MainMenu : UIManager
 {
-    [SerializeField, Tooltip("Menu Button List")] private List<GameObject> m_menuButtonList = new List<GameObject>();
-    
-    private int m_selectedAnimation = Animator.StringToHash("Selected");
-    private int m_pressedAnimation = Animator.StringToHash("Pressed");
-    private int m_releasedAnimation = Animator.StringToHash("Released");
+    [SerializeField, Tooltip("Menu Button List")] private List<MenuButton> m_menuButtonList = new List<MenuButton>();
 
     private int m_idButtonSelected = 0;
 
     private void Start()
     {
-        m_menuButtonList[m_idButtonSelected].GetComponent<Animator>().SetTrigger(m_selectedAnimation);
+        m_menuButtonList[m_idButtonSelected].FirstSelected();
     }
 
     protected override void Up_Started(InputAction.CallbackContext ctx)
     {
-        
-    }
-    protected override void Up_Canceled(InputAction.CallbackContext ctx)
-    {
-        
+        m_menuButtonList[m_idButtonSelected].Unselected();
+        m_idButtonSelected--;
+        m_idButtonSelected = m_idButtonSelected < 0 ? m_menuButtonList.Count - 1 : m_idButtonSelected;
+        m_menuButtonList[m_idButtonSelected].Selected();
     }
     protected override void Down_Started(InputAction.CallbackContext ctx)
     {
-        
-    }
-    protected override void Down_Canceled(InputAction.CallbackContext ctx)
-    {
-        
+        m_menuButtonList[m_idButtonSelected].Unselected();
+        m_idButtonSelected++;
+        m_idButtonSelected = m_idButtonSelected >= m_menuButtonList.Count ? 0 : m_idButtonSelected;
+        m_menuButtonList[m_idButtonSelected].Selected();
     }
     protected override void Select_Started(InputAction.CallbackContext ctx)
     {
-        
+        m_menuButtonList[m_idButtonSelected].Pressed();
     }
     protected override void Select_Canceled(InputAction.CallbackContext ctx)
     {
-        
+        m_menuButtonList[m_idButtonSelected].Released();
     }
     protected override void Back_Started(InputAction.CallbackContext ctx)
     {
