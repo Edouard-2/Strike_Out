@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8852405485515515589}
   - component: {fileID: 8852405485515515588}
+  - component: {fileID: 2110872485}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -46,23 +47,43 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2110872485}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnPlayerJoin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 6f2db344-52c7-4a39-96a6-6efc0d07f135
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 20901188-a39e-4f67-8c5c-2962ad2f5681
+        m_Path: <Gamepad>/buttonSouth
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 6021979597972639780, guid: baef5171385b7f144b859620c8622b2f, type: 3}
@@ -75,3 +96,26 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &2110872485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852405485515515611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a52ecb08634e9458ee9d9a9e62c61e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dontdestroyOnLoad: 1
+  m_listTransform:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_listReady:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_spawnBall:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_ballPrefab: {fileID: 9207138376108693208, guid: 028c5f79f54b69f46a7df1b3378f49ba, type: 3}
