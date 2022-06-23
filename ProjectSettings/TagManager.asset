@@ -14,7 +14,7 @@ TagManager:
   - Ball
   - Player
   - CollideWithPlayer
-  - 
+  - CollideWithBall
   - 
   - 
   - 

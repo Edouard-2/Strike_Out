@@ -1476,6 +1476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal
       objectReference: {fileID: 0}
+    - target: {fileID: 1959490794755159369, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1959490794755159370, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
       propertyPath: m_RootOrder
       value: 5

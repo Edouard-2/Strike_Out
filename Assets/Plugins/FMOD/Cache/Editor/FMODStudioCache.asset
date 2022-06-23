@@ -123,7 +123,11 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
+<<<<<<< HEAD
   lastModified: 637915853614489203
+=======
+  lastModified: 637915849382694216
+>>>>>>> 743d358fc50ffab0fd776a3d1238196bc1d6451a
   FileSizes:
   - Name: Desktop
     Value: 271648
@@ -143,7 +147,11 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
+<<<<<<< HEAD
   lastModified: 637915853614509202
+=======
+  lastModified: 637915849382704219
+>>>>>>> 743d358fc50ffab0fd776a3d1238196bc1d6451a
   FileSizes:
   - Name: Desktop
     Value: 1154
@@ -259,7 +267,11 @@ MonoBehaviour:
   - {fileID: -4829995534597348778}
   StringsBanks:
   - {fileID: -3001879367974279588}
+<<<<<<< HEAD
   cacheTime: 637915853614509202
+=======
+  cacheTime: 637915849382704219
+>>>>>>> 743d358fc50ffab0fd776a3d1238196bc1d6451a
   cacheVersion: 131591
 --- !u!114 &196032367258592237
 MonoBehaviour:

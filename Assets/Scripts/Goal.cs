@@ -32,6 +32,7 @@ public class Goal : MonoBehaviour
 
     private void AddScore()
     {
+        SoundManager.Instance.PlayGoalExplosion();
         m_spreiteRenderer.color = m_listColor[m_index];
         m_index++;
         GameManager.Instance.RespawnBall(m_spawnEnnemie);
