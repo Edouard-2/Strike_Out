@@ -11,6 +11,12 @@ public class MainMenu : UIManager
     private bool m_onPress = false;
     private bool m_onMove = false;
 
+    protected override void OnEnable()
+    {
+        m_playerInput = SceneManager.Instance.GetPlayerInput();
+        Init();
+    }
+
     private void Start()
     {
         m_menuButtonList[m_idButtonSelected].FirstSelected();

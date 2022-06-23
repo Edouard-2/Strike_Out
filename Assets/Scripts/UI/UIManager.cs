@@ -4,10 +4,19 @@ using UnityEngine.InputSystem;
 public class UIManager : MonoBehaviour
 {
     protected PlayerInput m_playerInput;
-    private void OnEnable()
+
+    protected virtual void OnEnable()
     {
-        m_playerInput = SceneManager.Instance.GetPlayerInput();
-        
+        Init();
+    }
+
+    protected virtual void OnDisable()
+    {
+        Uninit();
+    }
+    protected void Init()
+    {
+        Debug.Log(m_playerInput);
         m_playerInput.currentActionMap["Select"].started += Select_Started;
         m_playerInput.currentActionMap["Select"].canceled += Select_Canceled;
         m_playerInput.currentActionMap["Back"].started += Back_Started;
@@ -27,7 +36,7 @@ public class UIManager : MonoBehaviour
         m_playerInput.currentActionMap["Option"].started += Option_Started;
         m_playerInput.currentActionMap["Option"].canceled += Option_Canceled;
     }
-    private void OnDisable()
+    protected void Uninit()
     {
         m_playerInput.currentActionMap["Select"].started -= Select_Started;
         m_playerInput.currentActionMap["Select"].canceled -= Select_Canceled;

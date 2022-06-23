@@ -9,6 +9,12 @@ public class SplashScreen : UIManager
     private int m_pressedAnimation = Animator.StringToHash("Pressed");
     private int m_releasedAnimation = Animator.StringToHash("Released");
 
+    protected override void OnEnable()
+    {
+        m_playerInput = SceneManager.Instance.GetPlayerInput();
+        Init();
+    }
+
     protected override void Select_Started(InputAction.CallbackContext ctx)
     {
         if (!SceneManager.Instance.CanPlay) return;
@@ -28,6 +34,6 @@ public class SplashScreen : UIManager
     {
         yield return new WaitForSeconds(0.5f);
         // Envoi au menu
-        SceneManager.Instance.GoToScene(2);
+        SceneManager.Instance.GoToScene(3);
     }
 }

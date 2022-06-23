@@ -204,6 +204,17 @@
                 },
                 {
                     "name": "",
+                    "id": "064ecaaa-90aa-483d-b988-3e48a520e8ca",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "575a18bf-c7d8-4b54-a983-ef56f80b8168",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -243,6 +254,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Option",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db4727cc-6e1c-4f59-9f01-fa040350029c",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32ec0d74-583a-468f-9092-ffa3a14491f4",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b8350a4-f152-4d1f-9eaf-45bb02823286",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
