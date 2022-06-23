@@ -82,12 +82,13 @@ public class GameManager : Singleton<GameManager>
 
     private void InitPlayerWhenSpawning()
     {
+        m_listPlayer[m_indexSpawn].transform.localScale = Vector2.zero;
+        
         m_listPlayer[m_indexSpawn].m_goal = m_goalList[m_indexSpawn];
+        m_listPlayer[m_indexSpawn].InitGoalScript();
         
         m_listPlayer[m_indexSpawn].transform.position = m_listTransform[m_indexSpawn].position;
         m_listPlayer[m_indexSpawn].transform.rotation = m_listTransform[m_indexSpawn].rotation;
-
-        m_listPlayer[m_indexSpawn].transform.localScale = Vector2.zero;
 
         m_listReady[m_indexSpawn].StartButton();
     }
@@ -129,7 +130,7 @@ public class GameManager : Singleton<GameManager>
             yield return null;
         }
 
-        go.transform.localScale = Vector2.one;
+        go.transform.localScale = Vector2.one * 0.5f;
     }
 
     protected override string GetSingletonName()
