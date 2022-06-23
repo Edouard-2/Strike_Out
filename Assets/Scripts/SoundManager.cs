@@ -61,6 +61,10 @@ public class SoundManager : Singleton<SoundManager>
         if(m_chargeBall.IsPlaying()) m_chargeBall.Stop();
         m_chargeBall.Play();
     }
+    public void StopChargeBall()
+    {
+        if(m_chargeBall.IsPlaying()) m_chargeBall.Stop();
+    }
     public void PlayPropulseBall()
     {
         if(m_propulseBall.IsPlaying()) m_propulseBall.Stop();
