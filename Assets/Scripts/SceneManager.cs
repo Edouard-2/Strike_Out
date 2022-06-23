@@ -34,7 +34,7 @@ public class SceneManager : Singleton<SceneManager>
         m_idCurrentScene = 1;
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
     }
-    
+
     /// <summary>
     /// Change game scene to an other scene from a build index (LoadSceneMode.Additive).
     /// </summary>
