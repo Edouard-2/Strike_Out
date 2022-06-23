@@ -62,8 +62,8 @@ public class PlayerInteraction : MonoBehaviour
         m_hasCatched = true;
         m_currentBall.m_isCatched = true;
         
-        m_currentBall.transform.SetParent(transform);
         m_currentBall.StopBall();
+        m_currentBall.transform.SetParent(transform);
 
         StartBallCoroutines();
     }

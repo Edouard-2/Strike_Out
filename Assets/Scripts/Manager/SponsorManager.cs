@@ -33,6 +33,12 @@ public class SponsorManager : Singleton<SponsorManager>
         if(!allReady) return;
         DataManager.Instance.m_masterPlayerList.ForEach(p => { p.m_playerSelecter.m_state = SelecterController.States.NULL;});
         
+        DataManager.Instance.m_masterPlayerList.ForEach(p =>
+        {
+            p.m_playerSelecter.m_spriteRendererSelecter.enabled = false;
+            p.m_playerSelecter.m_spriteRendererSelecterShadow.enabled = false;
+        });
+        
         SceneManager.Instance.GoToScene(4);
     }
 }

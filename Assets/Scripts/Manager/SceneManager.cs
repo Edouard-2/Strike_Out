@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class SceneManager : Singleton<SceneManager>
 {
     private string m_nameCurrentScene = null;
-    private int m_idCurrentScene = 0;
+    [HideInInspector]public int m_idCurrentScene = 0;
 
     // Master Input Manager
     [SerializeField, Tooltip("Master Input Manager")]

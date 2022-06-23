@@ -49,10 +49,15 @@ public class GameManager : Singleton<GameManager>
 
     public void OnPlayerJoin(MasterPlayerController player)
     {
-        InitPlayerWhenSpawning(player);
-
         m_listReady[player.m_id].CancelButton();
 
+        SetUpGame(player);
+    }
+
+    private void SetUpGame(MasterPlayerController player)
+    {
+        InitPlayerWhenSpawning(player);
+        
         StartCoroutine(WaitForPlayerSpawn(player.m_playerManager.gameObject));
 
         m_indexSpawn++;
@@ -131,9 +136,9 @@ public class GameManager : Singleton<GameManager>
         
         //Dispay Menu Win
         m_winMenu.gameObject.SetActive(true);
-        m_textWin.ForEach(p => { p.text = $"Player {player.m_id + 1} WIN";});
+        m_textWin.ForEach(p => { p.text = $"Player {Mathf.Abs(1-player.m_id) + 1} WIN";});
         m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(false);});
-        
+        Destroy(m_ballInGame);
     }
 
     public void RestartGame()
@@ -154,6 +159,10 @@ public class GameManager : Singleton<GameManager>
         
         //Restart Game
         m_indexSpawn = 0;
-        DataManager.Instance.m_masterPlayerList.ForEach(p => { OnPlayerJoin(p);});
+        DataManager.Instance.m_masterPlayerList.ForEach(p =>
+        {
+            Debug.Log(p.m_id);
+            SetUpGame(p);
+        });
     }
 }

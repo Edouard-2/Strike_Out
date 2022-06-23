@@ -207,14 +207,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7214186042023283023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b12927551fbdd9a46bde588932786f67, type: 3}
+  m_Script: {fileID: 11500000, guid: c5bcdce78cd769b4eb53291a78a787ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_masterPlayerController: {fileID: 0}
   m_playerManager: {fileID: 0}
   m_spriteRendererSelecter: {fileID: 5343380268645464656}
   m_spriteRendererSelecterShadow: {fileID: 5836711811802977519}
-  m_playerInput: {fileID: 5597494298711082191}
+  m_firstSponsor: -1
+  m_secondSponsor: -1
   m_state: 0
   m_isReady: 0
 --- !u!114 &5597494298711082191

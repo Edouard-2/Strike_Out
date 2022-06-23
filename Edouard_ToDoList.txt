@@ -1,4 +1,5 @@
-Détruire les Masterinputmanger + player si dans sponsor et retour au menu
+Détruire l'Masterinputmanager puis l'instanciate quand aller dans sponsor depuis menu win
+Verifier pk player spawn inversé
 
 Sponsor Idée:
 - Boost Vitesse

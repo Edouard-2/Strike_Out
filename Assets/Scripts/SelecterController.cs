@@ -8,8 +8,8 @@ public class SelecterController : UIManager
     [HideInInspector] public MasterPlayerController m_masterPlayerController;
     [HideInInspector] public PlayerManager m_playerManager;
 
-    [SerializeField, Tooltip("Selecters spriteRenderer")] private SpriteRenderer m_spriteRendererSelecter;
-    [SerializeField, Tooltip("Selecters Shadow spriteRenderer")] private SpriteRenderer m_spriteRendererSelecterShadow;
+    [SerializeField, Tooltip("Selecters spriteRenderer")] public SpriteRenderer m_spriteRendererSelecter;
+    [SerializeField, Tooltip("Selecters Shadow spriteRenderer")] public SpriteRenderer m_spriteRendererSelecterShadow;
 
     [SerializeField, Tooltip("First Sponsor")] private int m_firstSponsor = -1;
     [SerializeField, Tooltip("Second Sponsor")] private int m_secondSponsor = -1;
@@ -37,10 +37,13 @@ public class SelecterController : UIManager
         m_state = States.SPONSOR;
         m_playerInput = GetComponent<PlayerInput>();
         Init();
+
+        if (SceneManager.Instance.m_idCurrentScene != 3) return;
         
         SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].FirstSelected();
+        
         SetPos();
-
+        
         if (m_masterPlayerController.m_id == 1)
         {
             m_spriteRendererSelecter.flipX = true;

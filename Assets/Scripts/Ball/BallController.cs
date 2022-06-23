@@ -34,6 +34,7 @@ public class BallController : MonoBehaviour
         m_camera = Camera.main;
         m_initRotation = m_camera.transform.rotation;
         m_initCameraZoom = m_camera.orthographicSize;
+        AddSpeedBall();
     }
 
     /// <summary>
@@ -65,7 +66,7 @@ public class BallController : MonoBehaviour
     public void Propulse(Vector3 dir)
     {
         ZoomCamera(5, 0.07f);
-        //transform.localScale = Vector2.one * 0.5f;
+        transform.localScale = Vector2.one * 0.5f;
         AddVelocity(dir);
     }
 
