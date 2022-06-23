@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     public void DoUpdate()
     {
-        if(!m_playerInteraction.HasCatched()) m_rb.MovePosition( m_rb.position + m_actionMovement.ReadValue<Vector2>() * m_speedMovement * Time.deltaTime);
+        if(!m_playerInteraction.HasCatched()) m_rb.MovePosition( m_rb.position + m_actionMovement.ReadValue<Vector2>() * m_speedMovement);
         
         float angle = Mathf.Atan2(-m_actionLook.ReadValue<Vector2>().x, m_actionLook.ReadValue<Vector2>().y) * Mathf.Rad2Deg;
         m_dirPlayer.z =  Mathf.SmoothDampAngle(transform.eulerAngles.z, angle, ref m_velocityAngle, m_smoothTime);
