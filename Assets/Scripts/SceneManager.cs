@@ -83,6 +83,8 @@ public class SceneManager : Singleton<SceneManager>
             // Le joueur ne peut plus appuyer sur les inputs
             m_canPlay = false;
             
+            UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));
+            
             AsyncOperation asynOp = UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(m_idCurrentScene);
             m_loaderAnimator.SetTrigger(m_popAnimation);
             // On attend que le déchargement soit fait
@@ -110,6 +112,7 @@ public class SceneManager : Singleton<SceneManager>
         }
 
         yield return new WaitForSeconds(0.5f);
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex));
         m_loaderAnimator.SetTrigger(m_depopAnimation);
         // On fait la transition
         EndTransition();

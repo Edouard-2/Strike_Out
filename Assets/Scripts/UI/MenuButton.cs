@@ -10,7 +10,6 @@ public class MenuButton : MonoBehaviour
     private int m_unselectedAnimation = Animator.StringToHash("Unselected");
     private int m_pressedAnimation = Animator.StringToHash("Pressed");
     private int m_releasedAnimation = Animator.StringToHash("Released");
-
     public void FirstSelected()
     {
         ResetAllTrigger();
@@ -18,37 +17,28 @@ public class MenuButton : MonoBehaviour
     }
     public void Selected()
     {
-        if (!SceneManager.Instance.CanPlay) return;
         ResetAllTrigger();
         SoundManager.Instance.PlayUIButtonSelect();
         m_buttonAnimator.SetTrigger(m_selectedAnimation);
     }
     public void Unselected()
     {
-        if (!SceneManager.Instance.CanPlay) return;
         ResetAllTrigger();
         m_buttonAnimator.SetTrigger(m_unselectedAnimation);
     }
     public void Pressed()
     {
-        if (!SceneManager.Instance.CanPlay) return;
         ResetAllTrigger();
         SoundManager.Instance.PlayUIButtonPress();
         m_buttonAnimator.SetTrigger(m_pressedAnimation);
     }
     public void Released()
     {
-        if (!SceneManager.Instance.CanPlay) return;
         ResetAllTrigger();
         SoundManager.Instance.PlayUIButtonRelease();
         m_buttonAnimator.SetTrigger(m_releasedAnimation);
-        Interact();
     }
-
-    protected virtual void Interact()
-    {
-        if (!SceneManager.Instance.CanPlay) return;
-    }
+    public virtual void Interact() { }
     private void ResetAllTrigger()
     {
         m_buttonAnimator.ResetTrigger(m_releasedAnimation);
