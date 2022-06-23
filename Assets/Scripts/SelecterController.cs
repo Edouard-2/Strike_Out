@@ -8,6 +8,6 @@ public class SelecterController : MonoBehaviour
     private void Awake()
     {
         SponsorManager.Instance.Add(this);
-        gameObject.name += $"_{SponsorManager.Instance.m_id}";
+        gameObject.name = $"PlayerSelecter#{SponsorManager.Instance.m_id}";
     }
 }
