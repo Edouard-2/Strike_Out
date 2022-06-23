@@ -134,6 +134,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Option"",
+                    ""type"": ""Button"",
+                    ""id"": ""19f53f96-1bf2-4789-87ca-ac067f81c9f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Up"",
                     ""type"": ""Button"",
                     ""id"": ""0a42f785-711a-443f-ac18-ff3a3bd80da3"",
@@ -152,9 +161,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Option"",
+                    ""name"": ""Left"",
                     ""type"": ""Button"",
-                    ""id"": ""19f53f96-1bf2-4789-87ca-ac067f81c9f6"",
+                    ""id"": ""b7a282cc-6fcf-43eb-8962-a4b14ca06051"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""64abd734-05cb-409c-b22b-5198eb079e18"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -208,23 +226,45 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2e6125cf-8c7d-4cf8-b463-bdd03b6cf18a"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Option"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""575a18bf-c7d8-4b54-a983-ef56f80b8168"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""HoldBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe178631-97df-4af0-8d3c-d7a3084143fc"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92abf323-97ae-452e-9c2e-fee7801a6ba2"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e6125cf-8c7d-4cf8-b463-bdd03b6cf18a"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Option"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -243,9 +283,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
         m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
         m_UI_HoldBack = m_UI.FindAction("HoldBack", throwIfNotFound: true);
+        m_UI_Option = m_UI.FindAction("Option", throwIfNotFound: true);
         m_UI_Up = m_UI.FindAction("Up", throwIfNotFound: true);
         m_UI_Down = m_UI.FindAction("Down", throwIfNotFound: true);
-        m_UI_Option = m_UI.FindAction("Option", throwIfNotFound: true);
+        m_UI_Left = m_UI.FindAction("Left", throwIfNotFound: true);
+        m_UI_Right = m_UI.FindAction("Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -357,9 +399,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Select;
     private readonly InputAction m_UI_Back;
     private readonly InputAction m_UI_HoldBack;
+    private readonly InputAction m_UI_Option;
     private readonly InputAction m_UI_Up;
     private readonly InputAction m_UI_Down;
-    private readonly InputAction m_UI_Option;
+    private readonly InputAction m_UI_Left;
+    private readonly InputAction m_UI_Right;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -367,9 +411,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Select => m_Wrapper.m_UI_Select;
         public InputAction @Back => m_Wrapper.m_UI_Back;
         public InputAction @HoldBack => m_Wrapper.m_UI_HoldBack;
+        public InputAction @Option => m_Wrapper.m_UI_Option;
         public InputAction @Up => m_Wrapper.m_UI_Up;
         public InputAction @Down => m_Wrapper.m_UI_Down;
-        public InputAction @Option => m_Wrapper.m_UI_Option;
+        public InputAction @Left => m_Wrapper.m_UI_Left;
+        public InputAction @Right => m_Wrapper.m_UI_Right;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,15 +434,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @HoldBack.started -= m_Wrapper.m_UIActionsCallbackInterface.OnHoldBack;
                 @HoldBack.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnHoldBack;
                 @HoldBack.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnHoldBack;
+                @Option.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOption;
+                @Option.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOption;
+                @Option.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOption;
                 @Up.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
                 @Up.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
                 @Up.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
                 @Down.started -= m_Wrapper.m_UIActionsCallbackInterface.OnDown;
                 @Down.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnDown;
                 @Down.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnDown;
-                @Option.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOption;
-                @Option.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOption;
-                @Option.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOption;
+                @Left.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLeft;
+                @Left.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLeft;
+                @Left.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLeft;
+                @Right.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
+                @Right.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
+                @Right.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -410,15 +462,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @HoldBack.started += instance.OnHoldBack;
                 @HoldBack.performed += instance.OnHoldBack;
                 @HoldBack.canceled += instance.OnHoldBack;
+                @Option.started += instance.OnOption;
+                @Option.performed += instance.OnOption;
+                @Option.canceled += instance.OnOption;
                 @Up.started += instance.OnUp;
                 @Up.performed += instance.OnUp;
                 @Up.canceled += instance.OnUp;
                 @Down.started += instance.OnDown;
                 @Down.performed += instance.OnDown;
                 @Down.canceled += instance.OnDown;
-                @Option.started += instance.OnOption;
-                @Option.performed += instance.OnOption;
-                @Option.canceled += instance.OnOption;
+                @Left.started += instance.OnLeft;
+                @Left.performed += instance.OnLeft;
+                @Left.canceled += instance.OnLeft;
+                @Right.started += instance.OnRight;
+                @Right.performed += instance.OnRight;
+                @Right.canceled += instance.OnRight;
             }
         }
     }
@@ -434,8 +492,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSelect(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnHoldBack(InputAction.CallbackContext context);
+        void OnOption(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
-        void OnOption(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }
