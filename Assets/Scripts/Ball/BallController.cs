@@ -87,12 +87,7 @@ public class BallController : MonoBehaviour
 
     private void AddSpeedBall()
     {
-        if (m_speedBall == m_speedBallMax) return;
-
-        m_speedBall *= m_velocityMultiplier;
-        m_speedBall += m_stepSpeed;
-
-        if (m_speedBall > m_speedBallMax) m_speedBall = m_speedBallMax;
+        m_speedBall = m_speedBallMax;
     }
 
     /// <summary>
@@ -121,6 +116,7 @@ public class BallController : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col)
     {
+        SoundManager.Instance.PlayHitWall();
         ShakeCamera();
     }
 
@@ -150,6 +146,5 @@ public class BallController : MonoBehaviour
     public void ResetBall()
     {
         m_rb.velocity = Vector2.zero;
-        m_speedBall = 0;
     }
 }

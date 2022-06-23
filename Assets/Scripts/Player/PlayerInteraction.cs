@@ -58,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
     private void StartPropulse(InputAction.CallbackContext context)
     {
         if (m_currentBall == null) return;
-
+        SoundManager.Instance.PlayCatchBall();
         m_hasCatched = true;
         m_currentBall.m_isCatched = true;
         
@@ -70,6 +70,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void StartBallCoroutines()
     {
+        SoundManager.Instance.PlayChargeBall();
+        
         //Transition de la ball vers le point de lancement
         if(m_coroutineTrans == null) m_coroutineTrans = StartCoroutine(TransBallInFront());
         
@@ -108,6 +110,9 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (!m_hasCatched) return;
         m_hasCatched = false;
+        
+        SoundManager.Instance.StopChargeBall();
+        SoundManager.Instance.PlayPropulseBall();
         
         m_spriteRenderer.size = Vector2.zero;
         
