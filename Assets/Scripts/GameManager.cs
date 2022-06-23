@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Playables;
 using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
     //--------------------------Player----------------------------//
-    private List<Transform> m_listPlayer = new List<Transform>();
+    private List<PlayerManager> m_listPlayer = new List<PlayerManager>();
 
     [SerializeField, Tooltip("Position des différents joueurs au spawn")]
     private List<Transform> m_listTransform;
@@ -14,6 +15,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField, Tooltip("Texte Ready pout lancer le jeu")]
     private List<ReadyInGame> m_listReady;
 
+    //--------------------------Ball----------------------------//
+    [SerializeField, Tooltip("Les deux Buts")]
+    private List<Goal> m_goalList;
+    
     //--------------------------Ball----------------------------//
     [SerializeField, Tooltip("Position de spawn de la balle")]
     private List<Transform> m_spawnBall;
@@ -26,47 +31,18 @@ public class GameManager : Singleton<GameManager>
 
     public void OnPlayerJoin()
     {
-        StartCoroutine(DOPlayerJoin());
+        StartCoroutine(VerifyIfPlayerCanJoin());
     }
 
-    IEnumerator DOPlayerJoin()
+    IEnumerator VerifyIfPlayerCanJoin()
     {
         yield return new WaitForSeconds(0.01f);
 
-        if (m_listPlayer.Count == 0)
-        {
-            SceneManager.Instance.AblePlayerInput(false);
-            yield break;
-        }
-
-        if (m_listPlayer.Count + m_indexSpawn == 4)
-        {
-            SceneManager.Instance.AblePlayerInput(true);
-            yield break;
-        }
-
-        if (!SceneManager.Instance.CanPlay)
-        {
-            if (m_listPlayer.Count > 0)
-            {
-                foreach (Transform transform in m_listPlayer)
-                {
-                    Destroy(transform.gameObject);
-                }
-
-                m_listPlayer = new List<Transform>();
-            }
-            yield break;
-        }
+        if (!CanPlay()) yield break;
 
         Debug.Log(m_listPlayer.Count);
 
-        m_listPlayer[m_indexSpawn].transform.position = m_listTransform[m_indexSpawn].position;
-        m_listPlayer[m_indexSpawn].transform.rotation = m_listTransform[m_indexSpawn].rotation;
-
-        m_listPlayer[m_indexSpawn].transform.localScale = Vector2.zero;
-
-        m_listReady[m_indexSpawn].StartButton();
+        InitPlayerWhenSpawning();
 
         StartCoroutine(WaitForPlayerSpawn(m_listPlayer[m_indexSpawn].transform.gameObject));
 
@@ -74,7 +50,49 @@ public class GameManager : Singleton<GameManager>
         if (m_indexSpawn > 1) StartCoroutine(SpawnBall());
     }
 
-    public void AddPlayer(Transform player)
+    private bool CanPlay()
+    {
+        if (m_listPlayer.Count == 0)
+        {
+            SceneManager.Instance.AblePlayerInput(false);
+            return false;
+        }
+
+        if (m_listPlayer.Count + m_indexSpawn == 4)
+        {
+            SceneManager.Instance.AblePlayerInput(true);
+            return false;
+        }
+
+        if (!SceneManager.Instance.CanPlay)
+        {
+            if (m_listPlayer.Count > 0)
+            {
+                foreach (PlayerManager player in m_listPlayer)
+                {
+                    Destroy(player.gameObject);
+                }
+
+                m_listPlayer = new List<PlayerManager>();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private void InitPlayerWhenSpawning()
+    {
+        m_listPlayer[m_indexSpawn].m_goal = m_goalList[m_indexSpawn];
+        
+        m_listPlayer[m_indexSpawn].transform.position = m_listTransform[m_indexSpawn].position;
+        m_listPlayer[m_indexSpawn].transform.rotation = m_listTransform[m_indexSpawn].rotation;
+
+        m_listPlayer[m_indexSpawn].transform.localScale = Vector2.zero;
+
+        m_listReady[m_indexSpawn].StartButton();
+    }
+
+    public void AddPlayer(PlayerManager player)
     {
         m_listPlayer.Add(player);
     }
@@ -88,7 +106,7 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator WaitForPlayerSpawn(GameObject go)
     {
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(1.1f);
         StartCoroutine(SpawnGameObjectToSize(go));
     }
 
@@ -107,7 +125,7 @@ public class GameManager : Singleton<GameManager>
         while (time < 0.5f)
         {
             time += Time.deltaTime;
-            go.transform.localScale = Vector2.Lerp(initScale, Vector2.one, time / 0.5f);
+            go.transform.localScale = Vector2.Lerp(initScale, Vector2.one * 0.5f, time / 0.5f);
             yield return null;
         }
 
@@ -117,5 +135,10 @@ public class GameManager : Singleton<GameManager>
     protected override string GetSingletonName()
     {
         return "GameManager";
+    }
+
+    public void Win(PlayerManager mPlayerManager)
+    {
+        Debug.Log("Win");
     }
 }
