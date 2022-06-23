@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{4807ee2c-2291-4d81-8ee0-ac14f5ea6db0}">
+		<property name="color">
+			<value>Yellow</value>
+		</property>
 		<property name="name">
 			<value>UI Button Select</value>
 		</property>
@@ -8,7 +11,7 @@
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{f7c44677-ca4e-4706-b892-435139b9fd0f}</destination>
+			<destination>{73cb7de9-143b-4337-8764-90787162cfc5}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{f4736948-f951-4711-a573-805e1a356a0d}</destination>
