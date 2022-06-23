@@ -53,7 +53,7 @@ public class BallController : MonoBehaviour
     {
         ShakeCamera();
         ZoomCamera(4.8f, 0.5f);
-        //transform.localScale = Vector2.one / 0.5f;
+        transform.localScale = Vector2.one * 0.5f;
         m_rb.velocity = Vector2.zero;
     }
 

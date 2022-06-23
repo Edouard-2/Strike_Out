@@ -30,7 +30,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerController m_playerController;
     private PlayerInteraction m_playerInteraction;
     private PlayerSkillsData m_playerSkillsData;
-    
+    public MasterPlayerController m_masterPlayerController;
+
     private void Awake()
     {
         // Create Component
@@ -46,8 +47,6 @@ public class PlayerManager : MonoBehaviour
         
         //Interact
         InitInteractionScript();
-        
-        GameManager.Instance.AddPlayer(this);
     }
 
     private void InitControllerScript()

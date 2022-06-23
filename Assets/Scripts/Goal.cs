@@ -22,9 +22,14 @@ public class Goal : MonoBehaviour
     [HideInInspector] public PlayerManager m_playerManager;
     
     //--------------------------Private----------------------------//
-    private int m_index;
+    [HideInInspector]public int m_index;
 
     private void Awake()
+    {
+        UpdateSprite();
+    }
+
+    public void UpdateSprite()
     {
         m_spreiteRenderer.color = m_listColor[m_index];
         m_index++;
@@ -33,8 +38,7 @@ public class Goal : MonoBehaviour
     private void AddScore()
     {
         SoundManager.Instance.PlayGoalExplosion();
-        m_spreiteRenderer.color = m_listColor[m_index];
-        m_index++;
+        UpdateSprite();
         GameManager.Instance.RespawnBall(m_spawnEnnemie);
         
     }
@@ -43,7 +47,7 @@ public class Goal : MonoBehaviour
     {
         if (m_index >= m_listColor.Count)
         {
-            GameManager.Instance.Win(m_playerManager);
+            GameManager.Instance.Win(m_playerManager.m_masterPlayerController);
             return;
         }
         col.transform.localScale = Vector2.zero;

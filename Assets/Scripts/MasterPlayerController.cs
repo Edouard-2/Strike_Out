@@ -17,7 +17,7 @@ public class MasterPlayerController : MonoBehaviour
         MasterInputManager.Instance.Add(this);
         
         m_id = MasterInputManager.Instance.m_id;
-        gameObject.name = $"Player_#{m_id}";
+        gameObject.name = $"Player #{m_id}";
         
         //ActiveSponsorPlayer();
         DataManager.Instance.Add(this);
@@ -30,6 +30,7 @@ public class MasterPlayerController : MonoBehaviour
         m_playerSelecter = m_playerSponsor.GetComponent<SelecterController>();
         m_playerSelecter.m_playerManager = m_playerManager;
         m_playerSelecter.m_masterPlayerController = this;
+        m_playerManager.m_masterPlayerController = this;
     }
 
     public void ActiveGameplayPlayer()

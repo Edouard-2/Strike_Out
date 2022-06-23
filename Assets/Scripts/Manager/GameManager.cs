@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.VFX;
 
 public class GameManager : Singleton<GameManager>
 {
     //--------------------------Player----------------------------//
-    [Header("Player")] private List<PlayerManager> m_listPlayer = new List<PlayerManager>();
+    [Header("Player")]
 
     [SerializeField, Tooltip("Position des différents joueurs au spawn")]
     private List<Transform> m_listTransform;
@@ -27,6 +28,14 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField, Tooltip("Prefab de la ball")]
     private GameObject m_ballPrefab;
+    
+    //--------------------------Win Objects----------------------------//
+    [Header("Win Objects")] 
+    [SerializeField, Tooltip("Les obj qui vont disparaitre dans le menu win")] private List<Transform> m_disapearObjects;
+    
+    [SerializeField, Tooltip("Text win")] private List<TextMeshPro> m_textWin;
+    
+    [SerializeField, Tooltip("Le menu lorque un des joueur gagne")] private Transform m_winMenu;
 
     //--------------------------Private----------------------------//
     private int m_indexSpawn;
@@ -40,8 +49,6 @@ public class GameManager : Singleton<GameManager>
 
     public void OnPlayerJoin(MasterPlayerController player)
     {
-        Debug.Log(m_listPlayer.Count);
-
         InitPlayerWhenSpawning(player);
 
         m_listReady[player.m_id].CancelButton();
@@ -74,11 +81,6 @@ public class GameManager : Singleton<GameManager>
         m_ballInGame.GetComponent<BallController>().ResetBall();
         //Instantiate(m_particleGoal, m_ballInGame.transform.position, Quaternion.identity);
         StartCoroutine(SpawnGameObjectToSize(m_ballInGame));
-    }
-
-    public void AddPlayer(PlayerManager player)
-    {
-        m_listPlayer.Add(player);
     }
 
     IEnumerator SpawnBall()
@@ -121,8 +123,37 @@ public class GameManager : Singleton<GameManager>
         return "GameManager";
     }
 
-    public void Win(PlayerManager mPlayerManager)
+    public void Win(MasterPlayerController player)
     {
-        Debug.Log("Win");
+        //Switch Controller
+        SceneManager.Instance.AblePlayerInput(true);
+        DataManager.Instance.m_masterPlayerList.ForEach(p => { p.ActiveSponsorPlayer();});
+        
+        //Dispay Menu Win
+        m_winMenu.gameObject.SetActive(true);
+        m_textWin.ForEach(p => { p.text = $"Player {player.m_id + 1} WIN";});
+        m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(false);});
+        
+    }
+
+    public void RestartGame()
+    {
+        //Hide Menu Win
+        m_winMenu.gameObject.SetActive(false);
+        m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(true);});
+        
+        DataManager.Instance.m_masterPlayerList.ForEach(p =>
+        {
+            p.m_playerManager.m_goal.m_index = 0;
+            p.m_playerManager.m_goal.UpdateSprite();
+        });
+        
+        //Switch Controller
+        SceneManager.Instance.AblePlayerInput(false);
+        DataManager.Instance.m_masterPlayerList.ForEach(p => { p.ActiveGameplayPlayer();});
+        
+        //Restart Game
+        m_indexSpawn = 0;
+        DataManager.Instance.m_masterPlayerList.ForEach(p => { OnPlayerJoin(p);});
     }
 }
