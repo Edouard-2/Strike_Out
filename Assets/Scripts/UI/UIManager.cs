@@ -18,6 +18,12 @@ public class UIManager : MonoBehaviour
         m_playerInput.currentActionMap["Up"].canceled += Up_Canceled;
         m_playerInput.currentActionMap["Down"].started += Down_Started;
         m_playerInput.currentActionMap["Down"].canceled += Down_Canceled;
+        m_playerInput.currentActionMap["Left"].started += Left_Started;
+        m_playerInput.currentActionMap["Left"].canceled += Left_Canceled;
+        m_playerInput.currentActionMap["Right"].started += Right_Started;
+        m_playerInput.currentActionMap["Right"].canceled += Right_Canceled;
+        m_playerInput.currentActionMap["Down"].started += Down_Started;
+        m_playerInput.currentActionMap["Down"].canceled += Down_Canceled;
         m_playerInput.currentActionMap["Option"].started += Option_Started;
         m_playerInput.currentActionMap["Option"].canceled += Option_Canceled;
     }
@@ -33,6 +39,10 @@ public class UIManager : MonoBehaviour
         m_playerInput.currentActionMap["Up"].canceled -= Up_Canceled;
         m_playerInput.currentActionMap["Down"].started -= Down_Started;
         m_playerInput.currentActionMap["Down"].canceled -= Down_Canceled;
+        m_playerInput.currentActionMap["Left"].started -= Left_Started;
+        m_playerInput.currentActionMap["Left"].canceled -= Left_Canceled;
+        m_playerInput.currentActionMap["Right"].started -= Right_Started;
+        m_playerInput.currentActionMap["Right"].canceled -= Right_Canceled;
         m_playerInput.currentActionMap["Option"].started -= Option_Started;
         m_playerInput.currentActionMap["Option"].canceled -= Option_Canceled;
     }
@@ -46,6 +56,10 @@ public class UIManager : MonoBehaviour
     protected virtual void Up_Canceled(InputAction.CallbackContext ctx) { }
     protected virtual void Down_Started(InputAction.CallbackContext ctx) { }
     protected virtual void Down_Canceled(InputAction.CallbackContext ctx) { }
+    protected virtual void Left_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void Left_Canceled(InputAction.CallbackContext ctx) { }
+    protected virtual void Right_Started(InputAction.CallbackContext ctx) { }
+    protected virtual void Right_Canceled(InputAction.CallbackContext ctx) { }
     protected virtual void Option_Started(InputAction.CallbackContext ctx) { }
     protected virtual void Option_Canceled(InputAction.CallbackContext ctx) { }
 }

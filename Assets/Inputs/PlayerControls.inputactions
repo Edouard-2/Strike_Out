@@ -112,6 +112,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Option",
+                    "type": "Button",
+                    "id": "19f53f96-1bf2-4789-87ca-ac067f81c9f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Up",
                     "type": "Button",
                     "id": "0a42f785-711a-443f-ac18-ff3a3bd80da3",
@@ -130,9 +139,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Option",
+                    "name": "Left",
                     "type": "Button",
-                    "id": "19f53f96-1bf2-4789-87ca-ac067f81c9f6",
+                    "id": "b7a282cc-6fcf-43eb-8962-a4b14ca06051",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right",
+                    "type": "Button",
+                    "id": "64abd734-05cb-409c-b22b-5198eb079e18",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -186,23 +204,45 @@
                 },
                 {
                     "name": "",
-                    "id": "2e6125cf-8c7d-4cf8-b463-bdd03b6cf18a",
-                    "path": "<Gamepad>/start",
-                    "interactions": "Press(behavior=1)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Option",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "575a18bf-c7d8-4b54-a983-ef56f80b8168",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "HoldBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe178631-97df-4af0-8d3c-d7a3084143fc",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92abf323-97ae-452e-9c2e-fee7801a6ba2",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e6125cf-8c7d-4cf8-b463-bdd03b6cf18a",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Option",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
