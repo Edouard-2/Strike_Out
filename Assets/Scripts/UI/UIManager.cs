@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
     protected PlayerInput m_playerInput;
     private void OnEnable()
     {
-        m_playerInput = SceneManager.Instance.GetComponent<PlayerInput>();
+        m_playerInput = SceneManager.Instance.GetPlayerInput();
         
         m_playerInput.currentActionMap["Select"].started += Select_Started;
         m_playerInput.currentActionMap["Select"].canceled += Select_Canceled;

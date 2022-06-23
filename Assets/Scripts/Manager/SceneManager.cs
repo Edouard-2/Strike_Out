@@ -163,4 +163,9 @@ public class SceneManager : Singleton<SceneManager>
     {
         m_playerInput.enabled = value;
     }
+
+    public PlayerInput GetPlayerInput()
+    {
+        return m_playerInput;
+    }
 }
