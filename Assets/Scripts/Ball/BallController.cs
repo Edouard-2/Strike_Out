@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -43,16 +44,6 @@ public class BallController : MonoBehaviour
     {
         if (m_isCatched) return null;
         return this;
-    }
-
-    /// <summary>
-    /// Change the direction of the ball when it's hit
-    /// </summary>
-    /// <param name="dir"> The direction pointing by the hit object </param>
-    public void HitDirection(Vector3 dir)
-    {
-        //Changer la direction de la balle
-        m_rb.velocity = dir * m_speedBall;
     }
 
     /// <summary>
@@ -154,5 +145,11 @@ public class BallController : MonoBehaviour
 
         m_camera.transform.rotation = m_initRotation;
         m_coroutineShake = null;
+    }
+
+    public void ResetBall()
+    {
+        m_rb.velocity = Vector2.zero;
+        m_speedBall = 0;
     }
 }

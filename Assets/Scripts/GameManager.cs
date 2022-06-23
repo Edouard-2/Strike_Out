@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Playables;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class GameManager : Singleton<GameManager>
 {
     //--------------------------Player----------------------------//
+    [Header("Player")]
     private List<PlayerManager> m_listPlayer = new List<PlayerManager>();
 
     [SerializeField, Tooltip("Position des différents joueurs au spawn")]
@@ -15,11 +17,15 @@ public class GameManager : Singleton<GameManager>
     [SerializeField, Tooltip("Texte Ready pout lancer le jeu")]
     private List<ReadyInGame> m_listReady;
 
-    //--------------------------Ball----------------------------//
+    //--------------------------Goals----------------------------//
+    [Header("Goal")]
     [SerializeField, Tooltip("Les deux Buts")]
     private List<Goal> m_goalList;
+    [SerializeField, Tooltip("Particule d'explosion")]
+    private VisualEffectAsset m_particleGoal;
     
     //--------------------------Ball----------------------------//
+    [Header("Ball")]
     [SerializeField, Tooltip("Position de spawn de la balle")]
     private List<Transform> m_spawnBall;
 
@@ -28,6 +34,8 @@ public class GameManager : Singleton<GameManager>
 
     //--------------------------Private----------------------------//
     private int m_indexSpawn;
+    
+    private GameObject m_ballInGame;
 
     public void OnPlayerJoin()
     {
@@ -93,6 +101,14 @@ public class GameManager : Singleton<GameManager>
         m_listReady[m_indexSpawn].StartButton();
     }
 
+    public void RespawnBall(Transform transform)
+    {
+        m_ballInGame.transform.position = transform.position;
+        m_ballInGame.GetComponent<BallController>().ResetBall();
+        //Instantiate(m_particleGoal, m_ballInGame.transform.position, Quaternion.identity);
+        StartCoroutine(SpawnGameObjectToSize(m_ballInGame));
+    }
+    
     public void AddPlayer(PlayerManager player)
     {
         m_listPlayer.Add(player);
@@ -101,8 +117,8 @@ public class GameManager : Singleton<GameManager>
     IEnumerator SpawnBall()
     {
         yield return new WaitForSeconds(2.1f);
-        GameObject go = Instantiate(m_ballPrefab, m_spawnBall[Random.Range(0, 2)].position, Quaternion.identity);
-        StartCoroutine(SpawnGameObjectToSize(go));
+        m_ballInGame = Instantiate(m_ballPrefab, m_spawnBall[Random.Range(0, 2)].position, Quaternion.identity);
+        StartCoroutine(SpawnGameObjectToSize(m_ballInGame));
     }
 
     IEnumerator WaitForPlayerSpawn(GameObject go)

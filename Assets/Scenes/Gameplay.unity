@@ -1248,6 +1248,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 846619735, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4931207
+      objectReference: {fileID: 0}
+    - target: {fileID: 846619735, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.24656042
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119584773, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.313
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119584773, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.046
+      objectReference: {fileID: 0}
     - target: {fileID: 1959490794755159369, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
       propertyPath: m_Name
       value: Goal (1)
@@ -1270,7 +1286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959490794755159370, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000035762784
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1959490794755159370, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1282,7 +1298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959490794755159370, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1
+      value: -0.00000016391276
       objectReference: {fileID: 0}
     - target: {fileID: 1959490794755159370, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1294,7 +1310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959490794755159370, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -180
+      value: -360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 401cda4584b4c554dbfc672a5a259ec2, type: 3}
@@ -1723,6 +1739,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2110872485, guid: 0ca6c8d2258710b4b8db55709a5958a1, type: 3}
+      propertyPath: m_particleGoal
+      value: 
+      objectReference: {fileID: 8926484042661614526, guid: a91608b94cb523441b282148fe256d37, type: 3}
     - target: {fileID: 2110872485, guid: 0ca6c8d2258710b4b8db55709a5958a1, type: 3}
       propertyPath: m_goalList.Array.size
       value: 2

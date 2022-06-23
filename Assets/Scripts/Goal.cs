@@ -14,6 +14,10 @@ public class Goal : MonoBehaviour
     [Header("Component")]
     [SerializeField, Tooltip("Sprite Renderer")] private SpriteRenderer m_spreiteRenderer;
     
+    //--------------------------Component----------------------------//
+    [Header("Spwan Ball")]
+    [SerializeField, Tooltip("l'endroit ou la balle spawn quand elle arrive dans ce goal")] private Transform m_spawnEnnemie;
+    
     //--------------------------Public Hide----------------------------//
     [HideInInspector] public PlayerManager m_playerManager;
     
@@ -22,13 +26,16 @@ public class Goal : MonoBehaviour
 
     private void Awake()
     {
-        AddScore();
+        m_spreiteRenderer.color = m_listColor[m_index];
+        m_index++;
     }
 
     private void AddScore()
     {
         m_spreiteRenderer.color = m_listColor[m_index];
         m_index++;
+        GameManager.Instance.RespawnBall(m_spawnEnnemie);
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -38,6 +45,7 @@ public class Goal : MonoBehaviour
             GameManager.Instance.Win(m_playerManager);
             return;
         }
+        col.transform.localScale = Vector2.zero;
         AddScore();
     }
 }
