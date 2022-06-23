@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class SponsorButton : MenuButton
+public class GameToSponsorButton : MenuButton
 {
     public override void Interact()
     {
