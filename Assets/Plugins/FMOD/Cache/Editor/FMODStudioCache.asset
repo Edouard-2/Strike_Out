@@ -26,7 +26,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2573
+  Length: 506
 --- !u!114 &-6186008707252302652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,10 +123,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637915849382694216
+  lastModified: 637915854708596652
   FileSizes:
   - Name: Desktop
-    Value: 271424
+    Value: 271648
   Exists: 1
 --- !u!114 &-3001879367974279588
 MonoBehaviour:
@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: -4829995534597348778}
   StringsBanks:
   - {fileID: -3001879367974279588}
-  cacheTime: 637915849382704219
+  cacheTime: 637915854708596652
   cacheVersion: 131591
 --- !u!114 &196032367258592237
 MonoBehaviour:
