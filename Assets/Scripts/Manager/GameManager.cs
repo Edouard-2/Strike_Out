@@ -1,32 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Playables;
-using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 
 public class GameManager : Singleton<GameManager>
 {
     //--------------------------Player----------------------------//
-    [Header("Player")]
-    private List<PlayerManager> m_listPlayer = new List<PlayerManager>();
+    [Header("Player")] private List<PlayerManager> m_listPlayer = new List<PlayerManager>();
 
     [SerializeField, Tooltip("Position des différents joueurs au spawn")]
     private List<Transform> m_listTransform;
 
     [SerializeField, Tooltip("Texte Ready pout lancer le jeu")]
-    private List<ReadyInGame> m_listReady;
+    public List<ReadyInGame> m_listReady;
 
     //--------------------------Goals----------------------------//
-    [Header("Goal")]
-    [SerializeField, Tooltip("Les deux Buts")]
+    [Header("Goal")] [SerializeField, Tooltip("Les deux Buts")]
     private List<Goal> m_goalList;
+
     [SerializeField, Tooltip("Particule d'explosion")]
     private VisualEffectAsset m_particleGoal;
-    
+
     //--------------------------Ball----------------------------//
-    [Header("Ball")]
-    [SerializeField, Tooltip("Position de spawn de la balle")]
+    [Header("Ball")] [SerializeField, Tooltip("Position de spawn de la balle")]
     private List<Transform> m_spawnBall;
 
     [SerializeField, Tooltip("Prefab de la ball")]
@@ -34,71 +30,42 @@ public class GameManager : Singleton<GameManager>
 
     //--------------------------Private----------------------------//
     private int m_indexSpawn;
-    
+
     private GameObject m_ballInGame;
 
-    public void OnPlayerJoin()
+    private void Awake()
     {
-        StartCoroutine(VerifyIfPlayerCanJoin());
+        DataManager.Instance.m_masterPlayerList.ForEach(p => { p.m_playerSelecter.m_state = SelecterController.States.GAMEPLAY;});
     }
 
-    IEnumerator VerifyIfPlayerCanJoin()
+    public void OnPlayerJoin(MasterPlayerController player)
     {
-        yield return new WaitForSeconds(0.01f);
-
-        if (!CanPlay()) yield break;
-
         Debug.Log(m_listPlayer.Count);
 
-        InitPlayerWhenSpawning();
+        InitPlayerWhenSpawning(player);
 
-        StartCoroutine(WaitForPlayerSpawn(m_listPlayer[m_indexSpawn].transform.gameObject));
+        m_listReady[player.m_id].CancelButton();
+
+        StartCoroutine(WaitForPlayerSpawn(player.m_playerManager.gameObject));
 
         m_indexSpawn++;
         if (m_indexSpawn > 1) StartCoroutine(SpawnBall());
     }
 
-    private bool CanPlay()
+    public void StartReadyButton(int id)
     {
-        if (m_listPlayer.Count == 0)
-        {
-            SceneManager.Instance.AblePlayerInput(false);
-            return false;
-        }
-
-        if (m_listPlayer.Count + m_indexSpawn == 4)
-        {
-            SceneManager.Instance.AblePlayerInput(true);
-            return false;
-        }
-
-        if (!SceneManager.Instance.CanPlay)
-        {
-            if (m_listPlayer.Count > 0)
-            {
-                foreach (PlayerManager player in m_listPlayer)
-                {
-                    Destroy(player.gameObject);
-                }
-
-                m_listPlayer = new List<PlayerManager>();
-            }
-            return false;
-        }
-        return true;
+        m_listReady[id].StartButton();
     }
 
-    private void InitPlayerWhenSpawning()
+    private void InitPlayerWhenSpawning(MasterPlayerController player)
     {
-        m_listPlayer[m_indexSpawn].transform.localScale = Vector2.zero;
-        
-        m_listPlayer[m_indexSpawn].m_goal = m_goalList[m_indexSpawn];
-        m_listPlayer[m_indexSpawn].InitGoalScript();
-        
-        m_listPlayer[m_indexSpawn].transform.position = m_listTransform[m_indexSpawn].position;
-        m_listPlayer[m_indexSpawn].transform.rotation = m_listTransform[m_indexSpawn].rotation;
+        player.m_playerManager.transform.localScale = Vector2.zero;
 
-        m_listReady[m_indexSpawn].StartButton();
+        player.m_playerManager.m_goal = m_goalList[player.m_id];
+        player.m_playerManager.InitGoalScript();
+
+        player.m_playerManager.transform.position = m_listTransform[player.m_id].position;
+        player.m_playerManager.transform.rotation = m_listTransform[player.m_id].rotation;
     }
 
     public void RespawnBall(Transform transform)
@@ -108,7 +75,7 @@ public class GameManager : Singleton<GameManager>
         //Instantiate(m_particleGoal, m_ballInGame.transform.position, Quaternion.identity);
         StartCoroutine(SpawnGameObjectToSize(m_ballInGame));
     }
-    
+
     public void AddPlayer(PlayerManager player)
     {
         m_listPlayer.Add(player);

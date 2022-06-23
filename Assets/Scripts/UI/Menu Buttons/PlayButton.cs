@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class PlayButton : MenuButton
 {
-    public override void Interact() { SceneManager.Instance.GoToScene(3); }
+    public override void Interact()
+    {
+        SceneManager.Instance.GoToScene(3);
+    }
 }

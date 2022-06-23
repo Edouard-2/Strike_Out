@@ -10,20 +10,28 @@ public class SceneManager : Singleton<SceneManager>
     private string m_nameCurrentScene = null;
     private int m_idCurrentScene = 0;
 
+    // Master Input Manager
+    [SerializeField, Tooltip("Master Input Manager")]
+    private GameObject m_masterInputManager;
+    
     // Animator de la Transition
-    [SerializeField, Tooltip("BlackTransition in the SceneManager's Canvas")] private Animator m_blackTransitionAnimator = null;
+    [SerializeField, Tooltip("BlackTransition in the SceneManager's Canvas")]
+    private Animator m_blackTransitionAnimator = null;
+
     private int m_openAnimation = Animator.StringToHash("Open");
     private int m_closeAnimation = Animator.StringToHash("Close");
-    
+
     // Animator du Loader
-    [SerializeField, Tooltip("Loader in the SceneManager's Canvas")] private Animator m_loaderAnimator = null;
+    [SerializeField, Tooltip("Loader in the SceneManager's Canvas")]
+    private Animator m_loaderAnimator = null;
+
     private int m_popAnimation = Animator.StringToHash("Pop");
     private int m_depopAnimation = Animator.StringToHash("Depop");
 
     private bool m_onChange = false;
-    
+
     private bool m_canPlay = true;
-    
+
     private PlayerInput m_playerInput;
     public bool CanPlay => m_canPlay;
 
@@ -56,10 +64,11 @@ public class SceneManager : Singleton<SceneManager>
     {
         m_blackTransitionAnimator.SetTrigger(m_closeAnimation);
     }
+
     private void EndTransition()
     {
         m_blackTransitionAnimator.SetTrigger(m_openAnimation);
-        
+
         m_onChange = false;
         StartCoroutine(PlayAccess());
     }
@@ -68,8 +77,14 @@ public class SceneManager : Singleton<SceneManager>
     {
         yield return new WaitForSeconds(GetTimeCurrentAnim() * 1.5f);
         m_canPlay = true;
+
+        //Activer le masterInputManager dans la scene sponsor
+        if (m_idCurrentScene == 3)
+        {
+            m_masterInputManager.SetActive(true);
+        }
     }
-    
+
     IEnumerator UnloadAsync(int buildIndex)
     {
         // On fait la transition
@@ -79,12 +94,13 @@ public class SceneManager : Singleton<SceneManager>
         if (m_idCurrentScene > 0)
         {
             yield return new WaitForSeconds(GetTimeCurrentAnim());
-            
+
             // Le joueur ne peut plus appuyer sur les inputs
             m_canPlay = false;
-            
-            UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));
-            
+
+            UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager
+                .GetSceneByBuildIndex(0));
+
             AsyncOperation asynOp = UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(m_idCurrentScene);
             m_loaderAnimator.SetTrigger(m_popAnimation);
             // On attend que le déchargement soit fait
@@ -96,6 +112,13 @@ public class SceneManager : Singleton<SceneManager>
 
         m_nameCurrentScene = UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex).name;
         m_idCurrentScene = buildIndex;
+
+        // Desactiver le player input si scene sponsor
+        if (buildIndex == 3)
+        {
+            AblePlayerInput(false);
+        }
+
         // On charge la scène
         StartCoroutine(LoadAsync(buildIndex));
     }
@@ -103,7 +126,8 @@ public class SceneManager : Singleton<SceneManager>
     IEnumerator LoadAsync(int buildIndex)
     {
         // On charge la scène
-        AsyncOperation asynOp = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(buildIndex, LoadSceneMode.Additive);
+        AsyncOperation asynOp =
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(buildIndex, LoadSceneMode.Additive);
 
         // On attend que le chargement soit fait
         while (!asynOp.isDone)
@@ -112,7 +136,8 @@ public class SceneManager : Singleton<SceneManager>
         }
 
         yield return new WaitForSeconds(0.5f);
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex));
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(
+            UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex));
         m_loaderAnimator.SetTrigger(m_depopAnimation);
         // On fait la transition
         EndTransition();
@@ -128,6 +153,7 @@ public class SceneManager : Singleton<SceneManager>
 
         return seconds;
     }
+
     protected override string GetSingletonName()
     {
         return "SceneManager";
