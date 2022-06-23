@@ -32,7 +32,16 @@ public class SceneManager : Singleton<SceneManager>
         m_playerInput = GetComponent<PlayerInput>();
         m_nameCurrentScene = UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1).name;
         m_idCurrentScene = 1;
+        UnloadAllScene();
         UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+    }
+
+    private void UnloadAllScene()
+    {
+        for (int i = 1; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
+        {
+            UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(i);
+        }
     }
     
     /// <summary>
