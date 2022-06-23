@@ -83,7 +83,7 @@ public class PlayerInteraction : MonoBehaviour
         while (time < 0.2f)
         {
             time += Time.deltaTime;
-            m_currentBall.transform.position = Vector2.Lerp(m_currentBall.transform.position, transform.position + transform.up * 2, time * 5);
+            m_currentBall.transform.position = Vector2.Lerp(m_currentBall.transform.position, transform.position + transform.up , time * 5);
             yield return null;
         }
     }

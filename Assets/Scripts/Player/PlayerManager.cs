@@ -41,19 +41,16 @@ public class PlayerManager : MonoBehaviour
         // Init variables component
         m_playerInput = GetComponent<PlayerInput>();
 
-        //Init goal
-        m_goal.m_playerManager = this;
-        
         //Controller
-        InitControllerScrypt();
+        InitControllerScript();
         
         //Interact
-        InitInteractionScrypt();
+        InitInteractionScript();
         
         GameManager.Instance.AddPlayer(this);
     }
 
-    private void InitControllerScrypt()
+    private void InitControllerScript()
     {
         m_playerController.m_playerInteraction = m_playerInteraction;
         m_playerController.m_speedMovement = m_speedMovement;
@@ -61,7 +58,7 @@ public class PlayerManager : MonoBehaviour
         m_playerController.InitInputAction();
     }
 
-    private void InitInteractionScrypt()
+    private void InitInteractionScript()
     {
         m_playerInteraction.m_spriteRenderer = m_spriteRenderer;
         m_playerInteraction.m_collider = m_collider;
@@ -69,6 +66,11 @@ public class PlayerManager : MonoBehaviour
         m_playerInteraction.m_layerBall = m_layerBall;
         m_playerInteraction.m_controls = m_playerInput;
         m_playerInteraction.InitInputAction();
+    }
+    
+    public void InitGoalScript()
+    {
+        m_goal.m_playerManager = this;
     }
     
     private void Update()

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -63,7 +62,7 @@ public class BallController : MonoBehaviour
     {
         ShakeCamera();
         ZoomCamera(4.8f, 0.5f);
-        transform.localScale = Vector2.one * 1.2f;
+        //transform.localScale = Vector2.one / 0.5f;
         m_rb.velocity = Vector2.zero;
     }
 
@@ -75,7 +74,7 @@ public class BallController : MonoBehaviour
     public void Propulse(Vector3 dir)
     {
         ZoomCamera(5, 0.07f);
-        transform.localScale = Vector2.one / 1.2f;
+        //transform.localScale = Vector2.one * 0.5f;
         AddVelocity(dir);
     }
 
