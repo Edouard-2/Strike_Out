@@ -39,7 +39,9 @@ public class SelecterController : UIManager
         Init();
 
         if (SceneManager.Instance.m_idCurrentScene != 3) return;
-        
+        Debug.Log(SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected]);
+        Debug.Log(SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].m_buttonAnimator);
+        Debug.Log(SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].m_id);
         SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].FirstSelected();
         
         SetPos();

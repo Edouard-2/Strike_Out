@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SponsorButton : MonoBehaviour
 {
-    [SerializeField, Tooltip("Button Animator")] private Animator m_buttonAnimator;
+    [SerializeField, Tooltip("Button Animator")] public Animator m_buttonAnimator;
     private int m_selectedAnimation = Animator.StringToHash("Selected");
     private int m_unselectedAnimation = Animator.StringToHash("Unselected");
     private int m_pressedAnimation = Animator.StringToHash("Pressed");

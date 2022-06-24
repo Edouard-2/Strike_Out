@@ -81,7 +81,8 @@ public class SceneManager : Singleton<SceneManager>
         //Activer le masterInputManager dans la scene sponsor
         if (m_idCurrentScene == 3)
         {
-            m_masterInputManager.SetActive(true);
+            GameObject go = Instantiate(m_masterInputManager);
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(go,UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));
         }
     }
 
