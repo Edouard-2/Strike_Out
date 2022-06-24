@@ -48,7 +48,7 @@ public class SoundManager : Singleton<SoundManager>
     // ---------------------------------------- GAMEPLAY ----------------------------------------
     public void PlayHitWall()
     {
-        if(m_hitWall.IsPlaying()) m_hitWall.Stop();
+        if(m_hitWall.IsPlaying()) return;
         m_hitWall.Play();
     }
     public void PlayCatchBall()

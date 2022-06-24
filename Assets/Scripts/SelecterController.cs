@@ -11,8 +11,8 @@ public class SelecterController : UIManager
     [SerializeField, Tooltip("Selecters spriteRenderer")] public SpriteRenderer m_spriteRendererSelecter;
     [SerializeField, Tooltip("Selecters Shadow spriteRenderer")] public SpriteRenderer m_spriteRendererSelecterShadow;
 
-    [SerializeField, Tooltip("First Sponsor")] private int m_firstSponsor = -1;
-    [SerializeField, Tooltip("Second Sponsor")] private int m_secondSponsor = -1;
+    [SerializeField, Tooltip("First Sponsor")] public int m_firstSponsor = -1;
+    [SerializeField, Tooltip("Second Sponsor")] public int m_secondSponsor = -1;
 
     private bool m_completeSponsor = false;
     

@@ -15,9 +15,9 @@ TagManager:
   - Player
   - CollideWithPlayer
   - CollideWithBall
-  - 
-  - 
-  - 
+  - Sponsor
+  - GhostBall
+  - CollideWithGhost
   - 
   - 
   - 
