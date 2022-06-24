@@ -1,6 +1,6 @@
 Sponsor Idée:
-- Boost Vitesse
-- Dupliquer les balles (avec des fausse)
-- Grandir la taille du joueur * 2
-- increase speed ball quand c'est le joueur
-- Réduire la balle dans le camps adverse
++ Boost Vitesse
++ Dupliquer les balles (avec des fausse)
++ Grandir la taille du joueur * 2
++ Réduire la balle dans le camps adverse
+- Muraille au bout du 3 eme

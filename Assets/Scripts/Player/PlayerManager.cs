@@ -74,4 +74,14 @@ public class PlayerManager : MonoBehaviour
     {
         m_playerController.DoUpdate();
     }
+
+    public void ResetPlayerVariables()
+    {
+        GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol.ForEach(p=>{Destroy(p.gameObject);});
+        m_playerInteraction.transform.localScale = Vector2.one * 0.5f;
+        m_playerInteraction.m_spriteRenderer = m_spriteRenderer;
+        m_playerInteraction.m_timeHoldingMax = m_timeHoldingMax;
+        m_playerInteraction.m_ghostBall = 0;
+        m_playerController.m_speedMovement = m_speedMovement;
+    }
 }

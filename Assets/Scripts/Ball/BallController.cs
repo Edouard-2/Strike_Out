@@ -12,6 +12,7 @@ public class BallController : MonoBehaviour
     //---------------------------Camera Property---------------------------//
     [HideInInspector]public Camera m_camera;
     [HideInInspector]public float m_durationShake;
+    [HideInInspector]public bool m_isShaking;
     
     //---------------------------Private---------------------------//
     private float m_velocityMultiplier = 2f;
@@ -119,6 +120,8 @@ public class BallController : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col)
     {
+        if (!m_isShaking) return;
+        
         SoundManager.Instance.PlayHitWall();
         
         if ((m_layerSponsor.value &( 1 << col.gameObject.layer )) > 0 )
@@ -131,12 +134,12 @@ public class BallController : MonoBehaviour
 
     private void ShakeCamera()
     {
-        if (m_coroutineShake == null)
-        {
-            float valueShake = 1/ 7.5f * m_speedBall;
-            m_camera.transform.DOShakeRotation(m_durationShake,valueShake,(int)valueShake,valueShake);
-            m_coroutineShake = StartCoroutine(StopShakeCamera());
-        }
+        if (m_coroutineShake != null) return;
+        
+        float valueShake = 1/ 7.5f * m_speedBall;
+        m_camera.transform.DOShakeRotation(m_durationShake,valueShake,(int)valueShake,valueShake);
+        m_coroutineShake = StartCoroutine(StopShakeCamera());
+        
     }
 
     IEnumerator StopShakeCamera()

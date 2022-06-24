@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using Component = System.ComponentModel.Component;
 using Random = UnityEngine.Random;
@@ -33,8 +34,10 @@ public class GameManager : Singleton<GameManager>
     private VisualEffectAsset m_particleGoal;
 
     //--------------------------Ball----------------------------//
-    [Header("Ball")] [SerializeField, Tooltip("Position de spawn de la balle")]
-    private List<Transform> m_spawnBall;
+    [Header("Ball")] 
+    [SerializeField, Tooltip("Position de spawn de la balle")] private List<Transform> m_spawnBall;
+    
+    [SerializeField, Tooltip("La prefab des ghost balls")] public GameObject m_prefabGhostBall;
 
     [SerializeField, Tooltip("Prefab de la ball")]
     private GameObject m_ballPrefab;
@@ -102,6 +105,8 @@ public class GameManager : Singleton<GameManager>
 
     private void InitPlayerWhenSpawning(MasterPlayerController player)
     {
+        player.m_playerManager.ResetPlayerVariables();
+        
         player.m_playerManager.transform.position = m_listTransform[player.m_id].position;
         player.m_playerManager.transform.rotation = m_listTransform[player.m_id].rotation;
         
@@ -200,6 +205,7 @@ public class GameManager : Singleton<GameManager>
         DataManager.Instance.m_masterPlayerList.ForEach(p =>
         {
             Debug.Log(p.m_id);
+            SetUpSponsors(p);
             SetUpGame(p);
         });
     }

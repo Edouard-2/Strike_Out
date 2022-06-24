@@ -31,10 +31,12 @@ public class PlayerInteraction : MonoBehaviour
     private Coroutine m_coroutineTrans;
     
     private InputAction.CallbackContext m_emptyCallback;
+    [HideInInspector]public int m_ghostBall;
 
 
     public void InitInputAction()
     {
+        m_ghostBall = 0;
         m_emptyCallback = new InputAction.CallbackContext();
         m_controls.currentActionMap["Interact"].started += StartPropulse;
         m_controls.currentActionMap["Interact"].canceled += PropulseBall;
@@ -119,6 +121,12 @@ public class PlayerInteraction : MonoBehaviour
         StopBallCoroutines();
         
         m_currentBall.m_isCatched = false;
+
+        for (int i = 0; i < m_ghostBall; i++)
+        {
+            GameObject go = Instantiate(GameManager.Instance.m_prefabGhostBall ,GameManager.Instance.m_ballInGame.transform.position, Quaternion.identity);
+            go.GetComponent<Rigidbody2D>().velocity = -transform.up;
+        }
         
         m_currentBall.transform.SetParent(null);
         m_currentBall.Propulse(transform.up);
@@ -163,5 +171,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (m_hasCatched) return;
         m_currentBall = null;
+    }
+
+    public void AddGhostBall()
+    {
+        m_ghostBall++;
     }
 }
