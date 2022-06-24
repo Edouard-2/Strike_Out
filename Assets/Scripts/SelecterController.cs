@@ -71,6 +71,7 @@ public class SelecterController : UIManager
         if (m_firstSponsor < 0 || m_secondSponsor < 0)
         {
             m_completeSponsor = false;
+            SponsorManager.Instance.PressToReady(m_masterPlayerController.m_id, false);
             return;
         }
         m_completeSponsor = true;

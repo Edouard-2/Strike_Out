@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 1155788068253163974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1215652, y: 0.1215652, z: 0.1215652}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 1155788068659658507}
   m_RootOrder: 1
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 75a82ec673b7f5247bc028c9ebf2f024, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f6f8642fe8bb5443918593b1ac38a75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 1155788068659658506}
   - component: {fileID: 2471312894674029716}
   m_Layer: 10
-  m_Name: Omega
+  m_Name: Smol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,3 +236,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e52c2f597c25046b8b0abdaf686055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player: {fileID: 0}

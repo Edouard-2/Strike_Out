@@ -45,3 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_dontdestroyOnLoad: 0
   m_masterPlayerList: []
+  m_listAllSponsor:
+  - {fileID: 1155788068659658516, guid: ad1443e351b35e14a8ba6a034078522f, type: 3}
+  - {fileID: 1155788068659658516, guid: a0f85d474bacc6249a4067f9465d8e96, type: 3}
+  - {fileID: 1155788068659658516, guid: bb25bee83bf1d8443a00487cb2b10a5b, type: 3}
+  - {fileID: 1155788068659658516, guid: 7a611d845f4d0cd4c8c89e63db80fca9, type: 3}
+  - {fileID: 1155788068659658516, guid: 2b5d536948d51cb4185736b92e0505af, type: 3}
