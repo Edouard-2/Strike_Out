@@ -34,6 +34,6 @@ public class SplashScreen : UIManager
     {
         yield return new WaitForSeconds(0.5f);
         // Envoi au menu
-        SceneManager.Instance.GoToScene(3);
+        SceneManager.Instance.GoToScene(2);
     }
 }

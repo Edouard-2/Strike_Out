@@ -194,6 +194,8 @@ public class SelecterController : UIManager
                 }
                 SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].Unselected();
                 m_lineButtonSelected--;
+                if (m_rowButtonSelected >= SponsorMenu.m_sponsorButtonList[m_lineButtonSelected].Count)
+                    m_rowButtonSelected = SponsorMenu.m_sponsorButtonList[m_lineButtonSelected].Count - 1;
                 SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].Selected();
                 SetPos();
                 break;
@@ -213,6 +215,8 @@ public class SelecterController : UIManager
                 }
                 SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].Unselected();
                 m_lineButtonSelected++;
+                if (m_rowButtonSelected >= SponsorMenu.m_sponsorButtonList[m_lineButtonSelected].Count)
+                    m_rowButtonSelected = SponsorMenu.m_sponsorButtonList[m_lineButtonSelected].Count - 1;
                 SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].Selected();
                 SetPos();
                 break;

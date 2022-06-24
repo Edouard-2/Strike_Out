@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -77,7 +78,11 @@ public class PlayerManager : MonoBehaviour
 
     public void ResetPlayerVariables()
     {
-        GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol.ForEach(p=>{Destroy(p.gameObject);});
+        if (GameManager.Instance.m_ballInGame != null)
+        {
+            GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol.ForEach(DestroyImmediate);
+            GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol = new List<GameObject>();
+        }
         m_playerInteraction.transform.localScale = Vector2.one * 0.5f;
         m_playerInteraction.m_spriteRenderer = m_spriteRenderer;
         m_playerInteraction.m_timeHoldingMax = m_timeHoldingMax;

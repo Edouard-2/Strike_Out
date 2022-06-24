@@ -22,7 +22,7 @@ public class BallManager : MonoBehaviour
     
     //--------------------------OTHER SCRIPT----------------------------//
     private BallController m_ballController;
-    [HideInInspector]public List<GameObject> m_listSmol = new List<GameObject>();
+    public List<GameObject> m_listSmol = new List<GameObject>();
 
     private void Awake()
     {
