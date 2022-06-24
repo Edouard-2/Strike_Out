@@ -72,12 +72,11 @@ public class SelecterController : UIManager
             return;
         }
         m_completeSponsor = true;
-        //----------------------------------------------------------------- /!\ /!\ /!\ /!\ /!\ TO DO Informer le press A to Ready /!\ /!\ /!\ /!\ /!\ 
+        SponsorManager.Instance.PressToReady(m_masterPlayerController.m_id, true);
     }
 
     private void Ready()
     {
-        //----------------------------------------------------------------- /!\ /!\ /!\ /!\ /!\ TO DO Faire descendre le joueur /!\ /!\ /!\ /!\ /!\ 
         m_isReady = true;
         SponsorManager.Instance.Ready(m_masterPlayerController.m_id);
     }
@@ -85,18 +84,37 @@ public class SelecterController : UIManager
     {
         if(!m_isReady) return;
         m_isReady = false;
-        //----------------------------------------------------------------- /!\ /!\ /!\ /!\ /!\ TO DO Faire remonter le joueur /!\ /!\ /!\ /!\ /!\ 
+        SponsorManager.Instance.UnreadyVisible(m_masterPlayerController.m_id);
         VerifComplete();
     }
     
     private void GetSponsor()
     {
+        SponsorButton button = SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected];
         if (m_firstSponsor > -1 && m_secondSponsor < 0)
-            m_secondSponsor = SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected]
-                .m_id;
-        else if(m_firstSponsor < 0)
-            m_firstSponsor = SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected]
-                .m_id;
+        {
+            m_secondSponsor = button.m_id;
+            SponsorManager.Instance.SetSecondSponsor(m_masterPlayerController.m_id, button.m_sprite);
+        }
+        else if (m_firstSponsor < 0)
+        {
+            m_firstSponsor = button.m_id;
+            SponsorManager.Instance.SetFirstSponsor(m_masterPlayerController.m_id, button.m_sprite);
+        }
+    }
+    private void RemoveSponsor()
+    {
+        if (m_firstSponsor > -1 && m_secondSponsor > -1)
+        {
+            m_secondSponsor = -1;
+            SponsorManager.Instance.RemoveSecondSponsor(m_masterPlayerController.m_id);
+        }
+        else if (m_firstSponsor > -1 && m_secondSponsor < 0)
+        {
+            m_firstSponsor = -1;
+            SponsorManager.Instance.RemoveFirstSponsor(m_masterPlayerController.m_id);
+        }
+        VerifComplete();
     }
     protected override void Select_Started(InputAction.CallbackContext ctx)
     {
@@ -256,9 +274,7 @@ public class SelecterController : UIManager
             case States.SPONSOR:
                 if (!m_isReady)
                 {
-                    if (m_firstSponsor > -1 && m_secondSponsor > -1) m_secondSponsor = -1;
-                    else if (m_firstSponsor > -1 && m_secondSponsor < 0) m_firstSponsor = -1;
-                    VerifComplete();
+                    RemoveSponsor();
                     break;
                 }
 

@@ -176,6 +176,22 @@ PrefabInstance:
       propertyPath: m_playerInput
       value: 
       objectReference: {fileID: 4034267575000614236}
+    - target: {fileID: 5343380268645464656, guid: 6b10b527df3222c4a9921e56170073dd, type: 3}
+      propertyPath: m_Size.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343380268645464656, guid: 6b10b527df3222c4a9921e56170073dd, type: 3}
+      propertyPath: m_Size.y
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836711811802977519, guid: 6b10b527df3222c4a9921e56170073dd, type: 3}
+      propertyPath: m_Size.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836711811802977519, guid: 6b10b527df3222c4a9921e56170073dd, type: 3}
+      propertyPath: m_Size.y
+      value: 1.52
+      objectReference: {fileID: 0}
     - target: {fileID: 7214186042023283023, guid: 6b10b527df3222c4a9921e56170073dd, type: 3}
       propertyPath: m_Name
       value: SelecteurController

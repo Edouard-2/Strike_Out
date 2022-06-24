@@ -10,8 +10,8 @@ public class SponsorButton : MonoBehaviour
     private int m_pressedAnimation = Animator.StringToHash("Pressed");
     private int m_releasedAnimation = Animator.StringToHash("Released");
     
-    [SerializeField, Tooltip("Sponsor Id")]
-    public int m_id = 0;
+    [SerializeField, Tooltip("Sponsor Id")] public int m_id = 0;
+    [SerializeField, Tooltip("Sponsor Sprite")] public Sprite m_sprite;
 
     private int m_nbView = 0;
     
