@@ -8,7 +8,6 @@ public class GameManager : Singleton<GameManager>
 {
     //--------------------------Player----------------------------//
     [Header("Player")]
-
     [SerializeField, Tooltip("Position des différents joueurs au spawn")]
     private List<Transform> m_listTransform;
 
@@ -71,13 +70,13 @@ public class GameManager : Singleton<GameManager>
 
     private void InitPlayerWhenSpawning(MasterPlayerController player)
     {
+        player.m_playerManager.transform.position = m_listTransform[player.m_id].position;
+        player.m_playerManager.transform.rotation = m_listTransform[player.m_id].rotation;
+        
         player.m_playerManager.transform.localScale = Vector2.zero;
 
         player.m_playerManager.m_goal = m_goalList[player.m_id];
         player.m_playerManager.InitGoalScript();
-
-        player.m_playerManager.transform.position = m_listTransform[player.m_id].position;
-        player.m_playerManager.transform.rotation = m_listTransform[player.m_id].rotation;
     }
 
     public void RespawnBall(Transform transform)
@@ -132,17 +131,24 @@ public class GameManager : Singleton<GameManager>
     {
         //Switch Controller
         SceneManager.Instance.AblePlayerInput(true);
-        DataManager.Instance.m_masterPlayerList.ForEach(p => { p.ActiveSponsorPlayer();});
+        DataManager.Instance.m_masterPlayerList.ForEach(p => {
+        {
+            p.m_playerManager.transform.localScale = Vector2.zero;
+            p.m_playerManager.enabled = false;
+        }});
         
         //Dispay Menu Win
         m_winMenu.gameObject.SetActive(true);
-        m_textWin.ForEach(p => { p.text = $"Player {Mathf.Abs(1-player.m_id) + 1} WIN";});
+        m_textWin.ForEach(p => { p.text = $"Player {(player.m_id + 1)} WIN";});
         m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(false);});
         Destroy(m_ballInGame);
     }
 
-    public void RestartGame()
+    public void RestartGame(RestartButton button)
     {
+        //Faire remonter le bouton
+        button.Released();
+        
         //Hide Menu Win
         m_winMenu.gameObject.SetActive(false);
         m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(true);});
@@ -155,7 +161,7 @@ public class GameManager : Singleton<GameManager>
         
         //Switch Controller
         SceneManager.Instance.AblePlayerInput(false);
-        DataManager.Instance.m_masterPlayerList.ForEach(p => { p.ActiveGameplayPlayer();});
+        DataManager.Instance.m_masterPlayerList.ForEach(p => { p.m_playerManager.enabled = true;});
         
         //Restart Game
         m_indexSpawn = 0;

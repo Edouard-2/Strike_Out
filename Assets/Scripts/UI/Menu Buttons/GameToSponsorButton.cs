@@ -7,6 +7,8 @@ public class GameToSponsorButton : MenuButton
         DataManager.Instance.m_masterPlayerList.ForEach(p=>{DestroyImmediate(p.gameObject);});
         DataManager.Instance.m_masterPlayerList = new List<MasterPlayerController>();
         
+        DestroyImmediate(MasterInputManager.Instance.gameObject);
+
         SceneManager.Instance.GoToScene(3);
     }
 }

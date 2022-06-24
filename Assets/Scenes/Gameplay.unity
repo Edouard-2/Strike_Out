@@ -3928,6 +3928,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8926484042661614526, guid: a91608b94cb523441b282148fe256d37, type: 3}
     - target: {fileID: 2110872485, guid: 0ca6c8d2258710b4b8db55709a5958a1, type: 3}
+      propertyPath: m_spawnTransform1
+      value: 
+      objectReference: {fileID: 767073831}
+    - target: {fileID: 2110872485, guid: 0ca6c8d2258710b4b8db55709a5958a1, type: 3}
+      propertyPath: m_spawnTransform2
+      value: 
+      objectReference: {fileID: 2006543707}
+    - target: {fileID: 2110872485, guid: 0ca6c8d2258710b4b8db55709a5958a1, type: 3}
       propertyPath: m_textWin.Array.size
       value: 2
       objectReference: {fileID: 0}

@@ -10,9 +10,13 @@ public class SponsorMenu : MonoBehaviour
     
     public static List<List<SponsorButton>> m_sponsorButtonList = new List<List<SponsorButton>>();
 
-    private void Start()
+    private void OnEnable()
     {
         m_sponsorButtonList.Add(m_line1List);
         m_sponsorButtonList.Add(m_line2List);
+    }
+    private void OnDisable()
+    {
+        m_sponsorButtonList = new List<List<SponsorButton>>();
     }
 }
