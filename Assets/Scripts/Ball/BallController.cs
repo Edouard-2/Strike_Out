@@ -6,12 +6,12 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     //---------------------------Components---------------------------//
-    public Rigidbody2D m_rb;
-    public CircleCollider2D m_collider;
+    [HideInInspector]public Rigidbody2D m_rb;
+    [HideInInspector]public CircleCollider2D m_collider;
 
     //---------------------------Camera Property---------------------------//
-    public Camera m_camera;
-    public float m_durationShake;
+    [HideInInspector]public Camera m_camera;
+    [HideInInspector]public float m_durationShake;
     
     //---------------------------Private---------------------------//
     private float m_velocityMultiplier = 2f;
@@ -23,11 +23,13 @@ public class BallController : MonoBehaviour
     
     private Coroutine m_coroutineShake;
 
-    public bool m_isCatched;
+    [HideInInspector]public bool m_isCatched;
     
     public Quaternion m_initRotation;
     
     private Coroutine m_coroutineZoom;
+    
+    [HideInInspector]public LayerMask m_layerSponsor;
 
     private void Awake()
     {
@@ -118,6 +120,12 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         SoundManager.Instance.PlayHitWall();
+        
+        if ((m_layerSponsor.value &( 1 << col.gameObject.layer )) > 0 )
+        {
+            col.gameObject.GetComponent<Sponsor>().Active();
+        }
+        
         ShakeCamera();
     }
 

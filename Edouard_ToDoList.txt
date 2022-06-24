@@ -1,5 +1,3 @@
-Verifier pk player spawn inversé
-
 Sponsor Idée:
 - Boost Vitesse
 - Dupliquer les balles (avec des fausse)

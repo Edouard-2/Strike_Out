@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.VFX;
+using Component = System.ComponentModel.Component;
+using Random = UnityEngine.Random;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -15,7 +18,15 @@ public class GameManager : Singleton<GameManager>
     public List<ReadyInGame> m_listReady;
 
     //--------------------------Goals----------------------------//
-    [Header("Goal")] [SerializeField, Tooltip("Les deux Buts")]
+    [Header("Sponsors")] 
+    [SerializeField, Tooltip("Sponsors du player 1")] private List<GameObject> m_sponsorsPlayer1;
+    [SerializeField, Tooltip("Sponsors du player 2")] private List<GameObject> m_sponsorsPlayer2;
+    
+    private List<List<GameObject>> m_sponsors = new List<List<GameObject>>();
+    
+    //--------------------------Goals----------------------------//
+    [Header("Goal")] 
+    [SerializeField, Tooltip("Les deux Buts")]
     private List<Goal> m_goalList;
 
     [SerializeField, Tooltip("Particule d'explosion")]
@@ -39,18 +50,39 @@ public class GameManager : Singleton<GameManager>
     //--------------------------Private----------------------------//
     private int m_indexSpawn;
 
-    private GameObject m_ballInGame;
+    [HideInInspector]public GameObject m_ballInGame;
 
     private void Awake()
     {
         DataManager.Instance.m_masterPlayerList.ForEach(p => { p.m_playerSelecter.m_state = SelecterController.States.GAMEPLAY;});
+        m_sponsors.Add(m_sponsorsPlayer1);
+        m_sponsors.Add(m_sponsorsPlayer2);
     }
 
     public void OnPlayerJoin(MasterPlayerController player)
     {
         m_listReady[player.m_id].CancelButton();
 
+        SetUpSponsors(player);
+        
         SetUpGame(player);
+    }
+
+    private void SetUpSponsors(MasterPlayerController player)
+    {
+        SelecterController selecter = player.m_playerSelecter;
+        GameObject first = DataManager.Instance.GetSponsor(selecter.m_firstSponsor);
+        GameObject second = DataManager.Instance.GetSponsor(selecter.m_secondSponsor);
+
+        SetUpSponsor(player, 0, first);
+        SetUpSponsor(player, 1, second);
+    }
+
+    private void SetUpSponsor(MasterPlayerController player, int pos, GameObject go)
+    {
+        GameObject sponsor = Instantiate(go, m_sponsors[player.m_id][pos].transform);
+
+        sponsor.GetComponent<Sponsor>().Init(player);
     }
 
     private void SetUpGame(MasterPlayerController player)
@@ -139,7 +171,7 @@ public class GameManager : Singleton<GameManager>
         
         //Dispay Menu Win
         m_winMenu.gameObject.SetActive(true);
-        m_textWin.ForEach(p => { p.text = $"Player {(player.m_id + 1)} WIN";});
+        m_textWin.ForEach(p => { p.text = $"Player {Mathf.Abs(player.m_id - 1) + 1} WIN";});
         m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(false);});
         Destroy(m_ballInGame);
     }

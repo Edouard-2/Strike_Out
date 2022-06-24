@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //--------------------------Controller----------------------------//
-    public float m_speedMovement = 10;
+    [HideInInspector]public float m_speedMovement = 10;
     
     //-------------------------Input System-----------------------------//
-    public PlayerInput m_controls;
+    [HideInInspector]public PlayerInput m_controls;
     
     //-------------------------Other Script-----------------------------//
-    public PlayerInteraction m_playerInteraction;
+    [HideInInspector]public PlayerInteraction m_playerInteraction;
     
     //---------------------------Private---------------------------//
     private Rigidbody2D m_rb;
