@@ -69,10 +69,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637915853614489203
+  lastModified: 637917580053879301
   FileSizes:
   - Name: Desktop
-    Value: 271648
+    Value: 272288
   Exists: 1
 --- !u!114 &-3936480325657798501
 MonoBehaviour:
@@ -100,7 +100,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 625
+  Length: 442
 --- !u!114 &-2482552159418041834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +127,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 671
+  Length: 220
+--- !u!114 &-760456060843829313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gameplay/SponsorDestroy
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/SponsorDestroy
+  Guid:
+    Data1: 1487408412
+    Data2: 1289496672
+    Data3: -761219191
+    Data4: 1251263249
+  Banks:
+  - {fileID: -4338893227757347377}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,12 +180,13 @@ MonoBehaviour:
   - {fileID: -2482552159418041834}
   - {fileID: 7681949848090315196}
   - {fileID: 3673660360072105270}
+  - {fileID: -760456060843829313}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4338893227757347377}
   StringsBanks:
   - {fileID: 7375097747701745765}
-  cacheTime: 637915853614509202
+  cacheTime: 637917580053899297
   cacheVersion: 131591
 --- !u!114 &1618259444327137378
 MonoBehaviour:
@@ -283,10 +311,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637915853614509202
+  lastModified: 637917580053899297
   FileSizes:
   - Name: Desktop
-    Value: 1154
+    Value: 1200
   Exists: 1
 --- !u!114 &7681949848090315196
 MonoBehaviour:

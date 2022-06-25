@@ -501,6 +501,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1973635394, guid: dd0bd844f13397e4788c756b52543453, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2358
+      objectReference: {fileID: 0}
     - target: {fileID: 5997203095051285372, guid: dd0bd844f13397e4788c756b52543453, type: 3}
       propertyPath: m_Name
       value: SceneManager
