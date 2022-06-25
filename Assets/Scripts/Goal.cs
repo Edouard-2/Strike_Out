@@ -14,9 +14,12 @@ public class Goal : MonoBehaviour
     [Header("Component")]
     [SerializeField, Tooltip("Sprite Renderer")] private SpriteRenderer m_spreiteRenderer;
     
-    //--------------------------Component----------------------------//
+    //--------------------------Spawn Ball----------------------------//
     [Header("Spwan Ball")]
     [SerializeField, Tooltip("l'endroit ou la balle spawn quand elle arrive dans ce goal")] private Transform m_spawnEnnemie;
+    
+    //--------------------------FeedBack----------------------------//
+    [SerializeField, Tooltip("L'expolison du goal quand on marque")] public GameObject m_explosion;
     
     //--------------------------Public Hide----------------------------//
     [HideInInspector] public PlayerManager m_playerManager;
@@ -38,6 +41,8 @@ public class Goal : MonoBehaviour
     private void AddScore()
     {
         SoundManager.Instance.PlayGoalExplosion();
+        GameObject go = Instantiate(m_explosion, transform.position, Quaternion.identity);
+        Destroy(go,1f);
         UpdateSprite();
         GameManager.Instance.RespawnBall(m_spawnEnnemie);
         

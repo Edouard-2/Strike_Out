@@ -41,11 +41,11 @@ public abstract class Sponsor : MonoBehaviour
         
         Destroy(m_spriteTransform.gameObject);
         
-        Power();
+         Power();
         
         // Feed backs
-        Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
-        
+        GameObject go = Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
+        Destroy(go,1f);
         Destroy(gameObject);
     }
     

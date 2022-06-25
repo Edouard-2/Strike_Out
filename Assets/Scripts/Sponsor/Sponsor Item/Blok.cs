@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class Blok : Sponsor
         
         if (m_tap == 2)
         {
-            Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
+            StartCoroutine(Explosion());
             Destroy(gameObject,0.2f);
             return;
         }
@@ -36,9 +37,14 @@ public class Blok : Sponsor
         m_tap++;
     }
 
+    IEnumerator Explosion()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
+    }
+
     public override void Active()
     {
-        
         FeedBack();
     }
 }
