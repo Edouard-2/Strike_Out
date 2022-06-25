@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9172442094893505890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gameplay/GetSponsor
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/GetSponsor
+  Guid:
+    Data1: 688351796
+    Data2: 1309496321
+    Data3: -816818807
+    Data4: 1354336519
+  Banks:
+  - {fileID: -4338893227757347377}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 274
 --- !u!114 &-8660363934594535407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,10 +96,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637917580053879301
+  lastModified: 637917661528484256
   FileSizes:
   - Name: Desktop
-    Value: 272288
+    Value: 564000
   Exists: 1
 --- !u!114 &-3936480325657798501
 MonoBehaviour:
@@ -101,6 +128,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 442
+--- !u!114 &-3200568220778745385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gameplay/ReadyBall
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/ReadyBall
+  Guid:
+    Data1: -272039157
+    Data2: 1094215666
+    Data3: -2020541285
+    Data4: -532872973
+  Banks:
+  - {fileID: -4338893227757347377}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5040
+--- !u!114 &-2962502781150416274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gameplay/ReadyPlayer
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/ReadyPlayer
+  Guid:
+    Data1: -231591161
+    Data2: 1099046910
+    Data3: 2070915490
+    Data4: -1388387826
+  Banks:
+  - {fileID: -4338893227757347377}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5040
 --- !u!114 &-2482552159418041834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +235,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2520
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,12 +262,16 @@ MonoBehaviour:
   - {fileID: 7681949848090315196}
   - {fileID: 3673660360072105270}
   - {fileID: -760456060843829313}
+  - {fileID: 2403714292656594788}
+  - {fileID: -9172442094893505890}
+  - {fileID: -2962502781150416274}
+  - {fileID: -3200568220778745385}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4338893227757347377}
   StringsBanks:
   - {fileID: 7375097747701745765}
-  cacheTime: 637917580053899297
+  cacheTime: 637917661528501249
   cacheVersion: 131591
 --- !u!114 &1618259444327137378
 MonoBehaviour:
@@ -242,6 +327,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 506
+--- !u!114 &2403714292656594788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gameplay/Win
+  m_EditorClassIdentifier: 
+  Path: event:/Gameplay/Win
+  Guid:
+    Data1: -1619560144
+    Data2: 1087100195
+    Data3: 1006180015
+    Data4: 2003215914
+  Banks:
+  - {fileID: -4338893227757347377}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6654
 --- !u!114 &3673660360072105270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,10 +423,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD Project/FMOD_StrikeOut/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637917580053899297
+  lastModified: 637917661528501249
   FileSizes:
   - Name: Desktop
-    Value: 1200
+    Value: 1374
   Exists: 1
 --- !u!114 &7681949848090315196
 MonoBehaviour:
