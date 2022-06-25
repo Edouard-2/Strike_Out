@@ -98,11 +98,13 @@ public class SelecterController : UIManager
         {
             m_secondSponsor = button.m_id;
             SponsorManager.Instance.SetSecondSponsor(m_masterPlayerController.m_id, button.m_sprite);
+            SponsorManager.Instance.AnimWait(m_masterPlayerController.m_id);
         }
         else if (m_firstSponsor < 0)
         {
             m_firstSponsor = button.m_id;
             SponsorManager.Instance.SetFirstSponsor(m_masterPlayerController.m_id, button.m_sprite);
+            SponsorManager.Instance.AnimSecond(m_masterPlayerController.m_id);
         }
     }
     private void RemoveSponsor()
@@ -111,11 +113,13 @@ public class SelecterController : UIManager
         {
             m_secondSponsor = -1;
             SponsorManager.Instance.RemoveSecondSponsor(m_masterPlayerController.m_id);
+            SponsorManager.Instance.AnimSecond(m_masterPlayerController.m_id);
         }
         else if (m_firstSponsor > -1 && m_secondSponsor < 0)
         {
             m_firstSponsor = -1;
             SponsorManager.Instance.RemoveFirstSponsor(m_masterPlayerController.m_id);
+            SponsorManager.Instance.AnimFirst(m_masterPlayerController.m_id);
         }
         VerifComplete();
     }
