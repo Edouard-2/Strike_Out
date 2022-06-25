@@ -80,7 +80,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (GameManager.Instance.m_ballInGame != null)
         {
-            GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol.ForEach(DestroyImmediate);
+            GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol.ForEach(Destroy);
             GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol = new List<GameObject>();
         }
         m_playerInteraction.transform.localScale = Vector2.one * 0.5f;

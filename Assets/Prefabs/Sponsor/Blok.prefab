@@ -237,6 +237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_player: {fileID: 0}
+  m_spriteTransform: {fileID: 1155788068253163973}
+  m_particuleBlock: {fileID: 5682871316346831124, guid: 4dea922b34de1ca45860af72f4ed10cc, type: 3}
   m_stepColor:
   - {r: 0.5566038, g: 0.37620288, b: 0.1496529, a: 1}
   - {r: 0.9150943, g: 0.5780038, b: 0.15107687, a: 1}

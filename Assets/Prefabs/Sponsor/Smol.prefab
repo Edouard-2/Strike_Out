@@ -237,3 +237,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_player: {fileID: 0}
+  m_spriteTransform: {fileID: 1155788068253163973}
+  m_particuleBlock: {fileID: 5682871316346831124, guid: 45a1606d197e243418171f52a17652ad, type: 3}

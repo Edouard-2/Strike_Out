@@ -136,7 +136,7 @@ public class BallController : MonoBehaviour
     {
         if (m_coroutineShake != null) return;
         
-        float valueShake = 1/ 7.5f * m_speedBall;
+        float valueShake = 1 / 25f * m_speedBall;
         m_camera.transform.DOShakeRotation(m_durationShake,valueShake,(int)valueShake,valueShake);
         m_coroutineShake = StartCoroutine(StopShakeCamera());
         
