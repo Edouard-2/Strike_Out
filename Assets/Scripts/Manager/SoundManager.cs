@@ -17,6 +17,11 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField, Tooltip("ChargeBall sound")] private StudioEventEmitter m_chargeBall;
     [SerializeField, Tooltip("PropulseBall sound")] private StudioEventEmitter m_propulseBall;
     [SerializeField, Tooltip("GoalExplosion sound")] private StudioEventEmitter m_goalExplosion;
+    [SerializeField, Tooltip("DestroySponsor sound")] private StudioEventEmitter m_destroySponsor;
+    [SerializeField, Tooltip("GetSponsor sound")] private StudioEventEmitter m_getSponsor;
+    [SerializeField, Tooltip("Win sound")] private StudioEventEmitter m_win;
+    [SerializeField, Tooltip("ReadyPlayer sound")] private StudioEventEmitter m_readyPlayer;
+    [SerializeField, Tooltip("ReadyBall sound")] private StudioEventEmitter m_readyBall;
     private void Start()
     {
         PlayMusic();
@@ -74,6 +79,31 @@ public class SoundManager : Singleton<SoundManager>
     {
         if(m_goalExplosion.IsPlaying()) m_goalExplosion.Stop();
         m_goalExplosion.Play();
+    }
+    public void PlayDestroySponsor()
+    {
+        if(m_destroySponsor.IsPlaying()) m_destroySponsor.Stop();
+        m_destroySponsor.Play();
+    }
+    public void PlayGetSponsor()
+    {
+        if(m_getSponsor.IsPlaying()) m_getSponsor.Stop();
+        m_getSponsor.Play();
+    }
+    public void PlayWin()
+    {
+        if(m_win.IsPlaying()) m_win.Stop();
+        m_win.Play();
+    }
+    public void PlayReadyPlayer()
+    {
+        if(m_readyPlayer.IsPlaying()) m_readyPlayer.Stop();
+        m_readyPlayer.Play();
+    }
+    public void PlayReadyBall()
+    {
+        if(m_readyBall.IsPlaying()) m_readyBall.Stop();
+        m_readyBall.Play();
     }
     protected override string GetSingletonName()
     {
