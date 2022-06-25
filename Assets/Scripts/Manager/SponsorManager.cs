@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -10,7 +11,14 @@ public class SponsorManager : Singleton<SponsorManager>
     [SerializeField, Tooltip("Labels Back des joueurs")] private List<GameObject> m_labelBackList = new List<GameObject>();
     [SerializeField, Tooltip("First Sponsors des joueurs")] private List<SpriteRenderer> m_firstSponsorListPlayer = new List<SpriteRenderer>();
     [SerializeField, Tooltip("Second Sponsors des joueurs")] private List<SpriteRenderer> m_secondSponsorListPlayer = new List<SpriteRenderer>();
-    private int id;
+
+    [SerializeField, Tooltip("Sprite de la croix")] private Sprite m_spriteCross;
+
+    private int m_animJoin = Animator.StringToHash("Join");
+    private int m_animReady = Animator.StringToHash("Ready");
+    private int m_animFirst = Animator.StringToHash("First");
+    private int m_animSecond = Animator.StringToHash("Second");
+    private int m_animWait = Animator.StringToHash("Wait");
     
     protected override string GetSingletonName()
     {
@@ -25,7 +33,7 @@ public class SponsorManager : Singleton<SponsorManager>
         
         if (player.m_id >= 2) return;
         
-        m_spriteRendererList[player.m_id].GetComponent<Animator>().SetTrigger("Join");
+        m_spriteRendererList[player.m_id].GetComponent<Animator>().SetTrigger(m_animJoin);
 
         if(player.m_id == 1) MasterInputManager.Instance.gameObject.SetActive(false);
     }
@@ -62,16 +70,18 @@ public class SponsorManager : Singleton<SponsorManager>
 
     private void ReadyVisible(int id)
     {
-        m_spriteRendererList[id].GetComponent<Animator>().SetTrigger("Ready");
+        ResetTriggers(id);
+        m_spriteRendererList[id].GetComponent<Animator>().SetTrigger(m_animReady);
         PressToBack(id, true);
         PressToReady(id, false);
     }
 
     public void UnreadyVisible(int id)
     {
-        m_spriteRendererList[id].GetComponent<Animator>().SetTrigger("Back");
+        ResetTriggers(id);
         PressToBack(id, false);
         PressToReady(id, true);
+        AnimWait(id);
     }
 
     public void SetFirstSponsor(int id, Sprite sprite)
@@ -80,7 +90,7 @@ public class SponsorManager : Singleton<SponsorManager>
     }
     public void RemoveFirstSponsor(int id)
     {
-        m_firstSponsorListPlayer[id].sprite = null;
+        m_firstSponsorListPlayer[id].sprite = m_spriteCross;
     }
     public void SetSecondSponsor(int id, Sprite sprite)
     {
@@ -88,6 +98,30 @@ public class SponsorManager : Singleton<SponsorManager>
     }
     public void RemoveSecondSponsor(int id)
     {
-        m_secondSponsorListPlayer[id].sprite = null;
+        m_secondSponsorListPlayer[id].sprite = m_spriteCross;
+    }
+
+    public void AnimFirst(int id)
+    {
+        ResetTriggers(id);
+        m_spriteRendererList[id].GetComponent<Animator>().SetTrigger(m_animFirst);
+    }
+    public void AnimSecond(int id)
+    {
+        ResetTriggers(id);
+        m_spriteRendererList[id].GetComponent<Animator>().SetTrigger(m_animSecond);
+    }
+    public void AnimWait(int id)
+    {
+        ResetTriggers(id);
+        m_spriteRendererList[id].GetComponent<Animator>().SetTrigger(m_animWait);
+    }
+
+    private void ResetTriggers(int id)
+    {
+        m_spriteRendererList[id].GetComponent<Animator>().ResetTrigger(m_animReady);
+        m_spriteRendererList[id].GetComponent<Animator>().ResetTrigger(m_animFirst);
+        m_spriteRendererList[id].GetComponent<Animator>().ResetTrigger(m_animSecond);
+        m_spriteRendererList[id].GetComponent<Animator>().ResetTrigger(m_animWait);
     }
 }
