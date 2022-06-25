@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEditorInternal;
 using UnityEngine;
@@ -41,7 +42,8 @@ public abstract class Sponsor : MonoBehaviour
         
         Destroy(m_spriteTransform.gameObject);
         
-         Power();
+        m_player.m_playerManager.transform.DOShakeScale(0.2f, 0.2f, 2, 2);
+        Power();
         
         // Feed backs
         GameObject go = Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
