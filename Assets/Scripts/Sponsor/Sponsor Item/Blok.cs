@@ -18,6 +18,9 @@ public class Blok : Sponsor
     protected override void FeedBack()
     {
         m_spriteTransform.DOShakePosition(0.2f, 0.1f,10,30);
+        
+        SoundManager.Instance.PlayDestroySponsor();
+        
         GameObject go = Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
         Destroy(go,1f);
         Power();

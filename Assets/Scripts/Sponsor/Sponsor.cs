@@ -45,6 +45,9 @@ public abstract class Sponsor : MonoBehaviour
         m_player.m_playerManager.transform.DOShakeScale(0.2f, 0.2f, 2, 2);
         Power();
         
+        SoundManager.Instance.PlayGetSponsor();
+        SoundManager.Instance.PlayDestroySponsor();
+        
         // Feed backs
         GameObject go = Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
         Destroy(go,1f);

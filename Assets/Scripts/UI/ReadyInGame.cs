@@ -22,6 +22,7 @@ public class ReadyInGame : MonoBehaviour
 
     public void CancelButton()
     {
+        SoundManager.Instance.PlayReadyPlayer();
         SoundManager.Instance.PlayUIButtonRelease();
         m_animatorList?.ForEach(a => a?.SetTrigger(m_releasedAnimation));
         // Lancer l'animation de fade out

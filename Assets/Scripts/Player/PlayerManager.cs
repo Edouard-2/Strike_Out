@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     
     //--------------------------Layer Mask----------------------------//
     [Header("Mesh Shadow")] 
-    [SerializeField, Tooltip("Shadow du mesh player")] private Transform m_shadowTransform;
+    [SerializeField, Tooltip("Shadow du mesh player")] public Transform m_shadowTransform;
     
     //--------------------------Layer Mask----------------------------//
     [Header("Layer")] 

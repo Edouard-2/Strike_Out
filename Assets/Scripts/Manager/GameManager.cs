@@ -127,6 +127,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator SpawnBall()
     {
         yield return new WaitForSeconds(2.1f);
+        SoundManager.Instance.PlayReadyBall();
         m_ballInGame = Instantiate(m_ballPrefab, m_spawnBall[Random.Range(0, 2)].position, Quaternion.identity);
         StartCoroutine(SpawnGameObjectToSize(m_ballInGame));
     }
@@ -179,12 +180,14 @@ public class GameManager : Singleton<GameManager>
         m_textWin.ForEach(p => { p.text = $"Player {Mathf.Abs(player.m_id - 1) + 1} WIN";});
         m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(false);});
 
+        SoundManager.Instance.PlayWin();
         StartCoroutine(SpawnParticuleWin());
 
         DataManager.Instance.m_masterPlayerList.ForEach(p =>
         {
             p.m_playerManager.ResetPlayerVariables();
             p.m_playerManager.transform.localScale = Vector2.zero;
+            p.m_playerManager.m_shadowTransform.localScale = Vector2.zero;
         });
         
         Destroy(m_ballInGame);
