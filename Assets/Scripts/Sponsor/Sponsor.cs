@@ -1,7 +1,5 @@
 using System.Collections;
 using DG.Tweening;
-using Unity.Mathematics;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Serialization;
 
