@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField, Tooltip("Texte Ready pout lancer le jeu")]
     public List<ReadyInGame> m_listReady;
 
-    //--------------------------Goals----------------------------//
+    //--------------------------Sponsors----------------------------//
     [Header("Sponsors")] 
     [SerializeField, Tooltip("Sponsors du player 1")] private List<GameObject> m_sponsorsPlayer1;
     [SerializeField, Tooltip("Sponsors du player 2")] private List<GameObject> m_sponsorsPlayer2;
@@ -44,11 +44,13 @@ public class GameManager : Singleton<GameManager>
     
     //--------------------------Win Objects----------------------------//
     [Header("Win Objects")] 
-    [SerializeField, Tooltip("Les obj qui vont disparaitre dans le menu win")] private List<Transform> m_disapearObjects;
+    [SerializeField, Tooltip("Les obj qui vont disparaitre dans le menu win")] private List<Transform> m_disapearObjects = new List<Transform>();
+    [SerializeField, Tooltip("Spawn des 4 particule")] private List<Transform> m_spawnParticule = new List<Transform>();
     
     [SerializeField, Tooltip("Text win")] private List<TextMeshPro> m_textWin;
     
     [SerializeField, Tooltip("Le menu lorque un des joueur gagne")] private Transform m_winMenu;
+    [SerializeField, Tooltip("particule lancé lorsqu'on gagne")] private GameObject m_winParticule;
 
     //--------------------------Private----------------------------//
     private int m_indexSpawn;
@@ -176,7 +178,9 @@ public class GameManager : Singleton<GameManager>
         m_winMenu.gameObject.SetActive(true);
         m_textWin.ForEach(p => { p.text = $"Player {Mathf.Abs(player.m_id - 1) + 1} WIN";});
         m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(false);});
-        
+
+        StartCoroutine(SpawnParticuleWin());
+
         DataManager.Instance.m_masterPlayerList.ForEach(p =>
         {
             p.m_playerManager.ResetPlayerVariables();
@@ -184,6 +188,16 @@ public class GameManager : Singleton<GameManager>
         });
         
         Destroy(m_ballInGame);
+    }
+
+    IEnumerator SpawnParticuleWin()
+    {
+        yield return new WaitForSeconds(1);
+        Instantiate(m_winParticule, m_spawnParticule[0]);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(m_winParticule, m_spawnParticule[1]);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(m_winParticule, m_spawnParticule[2]);
     }
 
     public void RestartGame(RestartButton button)
