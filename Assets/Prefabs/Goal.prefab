@@ -44,7 +44,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.23571138, y: 0}
+  m_Offset: {x: -0.24656042, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4714226, y: 1}
+  m_Size: {x: 1.4931207, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &2119584772
 GameObject:
@@ -81,7 +81,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119584772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.216, y: 0.041, z: 0}
+  m_LocalPosition: {x: -3.313, y: -0.046, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1959490794755159370}
@@ -219,4 +219,6 @@ MonoBehaviour:
   - {r: 0.31132078, g: 0.041999467, b: 0, a: 1}
   m_spreiteRenderer: {fileID: 1959490794755159372}
   m_spawnEnnemie: {fileID: 2119584773}
+  m_explosion: {fileID: 5682871316346831124, guid: 14c742c8e87a3b447897de086d6b3246, type: 3}
   m_playerManager: {fileID: 0}
+  m_index: 0

@@ -13,12 +13,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Tooltip("Sprite Renderer du feedback grab")] private SpriteRenderer m_spriteRenderer;
     
     //--------------------------Layer Mask----------------------------//
-    [Header("Layer")] 
-    [SerializeField, Tooltip("Layer de la ball")] private LayerMask m_layerBall;
+    [Header("Mesh Shadow")] 
+    [SerializeField, Tooltip("Shadow du mesh player")] private Transform m_shadowTransform;
     
     //--------------------------Layer Mask----------------------------//
-    [HideInInspector] public Goal m_goal;
-    
+    [Header("Layer")] 
+    [SerializeField, Tooltip("Layer de la ball")] private LayerMask m_layerBall;
+
     //--------------------------Controller Variables----------------------------//
     [Header("Controller")] 
     [SerializeField, Tooltip("Vitesse des mouvements du joueur")] private float m_speedMovement = 10;
@@ -27,10 +28,16 @@ public class PlayerManager : MonoBehaviour
     [Header("Interaction")] 
     [SerializeField, Tooltip("Vitesse des mouvements du joueur")] private float m_timeHoldingMax = 1f;
     
+    //--------------------------Public Hide----------------------------//
+    [HideInInspector] public Goal m_goal;
+    
     //--------------------------OTHER SCRIPT----------------------------//
     [HideInInspector] public PlayerController m_playerController;
     [HideInInspector] public PlayerInteraction m_playerInteraction;
     [HideInInspector] public MasterPlayerController m_masterPlayerController;
+
+    private Vector3 m_dirShadow = new Vector3(0,-0.05f);
+    private Vector3 m_scaleMultiple = new Vector3(0.25f,0.23f);
 
     private void Awake()
     {
@@ -58,6 +65,7 @@ public class PlayerManager : MonoBehaviour
 
     private void InitInteractionScript()
     {
+        m_shadowTransform.SetParent(null);
         m_playerInteraction.m_spriteRenderer = m_spriteRenderer;
         m_playerInteraction.m_collider = m_collider;
         m_playerInteraction.m_timeHoldingMax = m_timeHoldingMax;
@@ -73,6 +81,10 @@ public class PlayerManager : MonoBehaviour
     
     private void Update()
     {
+        m_shadowTransform.position = transform.position + m_dirShadow;
+        m_shadowTransform.rotation = transform.rotation;
+        m_shadowTransform.localScale = Vector3.Scale(transform.localScale, m_scaleMultiple);
+        
         m_playerController.DoUpdate();
     }
 
@@ -83,6 +95,9 @@ public class PlayerManager : MonoBehaviour
             GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol.ForEach(Destroy);
             GameManager.Instance.m_ballInGame.GetComponent<BallManager>().m_listSmol = new List<GameObject>();
         }
+        
+        m_shadowTransform.SetParent(null);
+        
         m_playerInteraction.transform.localScale = Vector2.one * 0.5f;
         m_playerInteraction.m_spriteRenderer = m_spriteRenderer;
         m_playerInteraction.m_timeHoldingMax = m_timeHoldingMax;
