@@ -3,4 +3,4 @@ Sponsor Idée:
 + Dupliquer les balles (avec des fausse)
 + Grandir la taille du joueur * 2
 + Réduire la balle dans le camps adverse
-- Muraille au bout du 3 eme
++ Muraille au bout du 3 eme
