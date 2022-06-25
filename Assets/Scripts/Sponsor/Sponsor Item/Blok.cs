@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Blok : Sponsor
@@ -7,20 +7,38 @@ public class Blok : Sponsor
     private int m_tap = 0;
     private SpriteRenderer m_rnd;
 
+    [SerializeField, Tooltip("Color Step")] private List<Color> m_stepColor = new List<Color>();
+    
     private void OnEnable()
     {
         m_rnd = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
-    [SerializeField, Tooltip("Color Step")] private List<Color> m_stepColor = new List<Color>();
-    public override void Active()
+    protected override void FeedBack()
     {
-        if (m_tap >= 2)
+        m_spriteTransform.DOShakePosition(0.2f, 0.1f,10,30);
+        
+        Power();
+    }
+
+    public override void Power()
+    {
+        if (m_tap > 2) return;
+        
+        if (m_tap == 2)
         {
-            Destroy(gameObject);
+            Instantiate(m_particuleBlock, transform.position, Quaternion.identity);
+            Destroy(gameObject,0.2f);
             return;
         }
+        
         m_rnd.color = m_stepColor[m_tap];
         m_tap++;
+    }
+
+    public override void Active()
+    {
+        
+        FeedBack();
     }
 }

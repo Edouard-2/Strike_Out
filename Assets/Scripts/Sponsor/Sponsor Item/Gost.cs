@@ -1,10 +1,13 @@
-using UnityEngine;
 
 public class Gost : Sponsor
 {
-    public override void Active()
+    public override void Power()
     {
         m_player.m_playerManager.m_playerInteraction.AddGhostBall();
-        Destroy(gameObject);
+    }
+
+    public override void Active()
+    {
+        FeedBack();
     }
 }

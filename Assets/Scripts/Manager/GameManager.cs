@@ -105,8 +105,6 @@ public class GameManager : Singleton<GameManager>
 
     private void InitPlayerWhenSpawning(MasterPlayerController player)
     {
-        player.m_playerManager.ResetPlayerVariables();
-        
         player.m_playerManager.transform.position = m_listTransform[player.m_id].position;
         player.m_playerManager.transform.rotation = m_listTransform[player.m_id].rotation;
         
@@ -178,6 +176,13 @@ public class GameManager : Singleton<GameManager>
         m_winMenu.gameObject.SetActive(true);
         m_textWin.ForEach(p => { p.text = $"Player {Mathf.Abs(player.m_id - 1) + 1} WIN";});
         m_disapearObjects.ForEach(p=>{p.gameObject.SetActive(false);});
+        
+        DataManager.Instance.m_masterPlayerList.ForEach(p =>
+        {
+            p.m_playerManager.ResetPlayerVariables();
+            p.m_playerManager.transform.localScale = Vector2.zero;
+        });
+        
         Destroy(m_ballInGame);
     }
 
