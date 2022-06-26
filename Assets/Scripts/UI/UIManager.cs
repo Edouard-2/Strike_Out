@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     }
     protected void Uninit()
     {
+        if (m_playerInput == null || m_playerInput.currentActionMap == null) return;
+        
         m_playerInput.currentActionMap["Select"].started -= Select_Started;
         m_playerInput.currentActionMap["Select"].canceled -= Select_Canceled;
         m_playerInput.currentActionMap["Back"].started -= Back_Started;
