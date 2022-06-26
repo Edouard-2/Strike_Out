@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour
     }
     protected void Init()
     {
-        Debug.Log(m_playerInput);
         m_playerInput.currentActionMap["Select"].started += Select_Started;
         m_playerInput.currentActionMap["Select"].canceled += Select_Canceled;
         m_playerInput.currentActionMap["Back"].started += Back_Started;

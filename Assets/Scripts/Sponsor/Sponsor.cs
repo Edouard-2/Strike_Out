@@ -31,7 +31,6 @@ public abstract class Sponsor : MonoBehaviour
         
         while (Vector3.Distance(m_player.m_playerManager.transform.position,m_spriteTransform.position) > 0.1f)
         {
-            Debug.Log(time);
             m_spriteTransform.position = Vector3.Lerp(initPosition, m_player.m_playerManager.transform.position, time*2);
             m_spriteTransform.localScale = Vector3.Lerp(initScale, Vector3.zero, time);
             time += Time.deltaTime;

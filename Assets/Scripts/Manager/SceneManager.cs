@@ -21,10 +21,6 @@ public class SceneManager : Singleton<SceneManager>
     private int m_openAnimation = Animator.StringToHash("Open");
     private int m_closeAnimation = Animator.StringToHash("Close");
 
-    // Animator du Loader
-    [SerializeField, Tooltip("Loader in the SceneManager's Canvas")]
-    private Animator m_loaderAnimator = null;
-
     private int m_popAnimation = Animator.StringToHash("Pop");
     private int m_depopAnimation = Animator.StringToHash("Depop");
 
@@ -103,7 +99,6 @@ public class SceneManager : Singleton<SceneManager>
                 .GetSceneByBuildIndex(0));
 
             AsyncOperation asynOp = UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(m_idCurrentScene);
-            m_loaderAnimator.SetTrigger(m_popAnimation);
             // On attend que le déchargement soit fait
             while (!asynOp.isDone)
             {
@@ -135,11 +130,8 @@ public class SceneManager : Singleton<SceneManager>
         {
             yield return null;
         }
-
-        yield return new WaitForSeconds(0.5f);
         UnityEngine.SceneManagement.SceneManager.SetActiveScene(
             UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex));
-        m_loaderAnimator.SetTrigger(m_depopAnimation);
         // On fait la transition
         EndTransition();
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class SelecterController : UIManager
 {
@@ -39,11 +40,7 @@ public class SelecterController : UIManager
         Init();
 
         if (SceneManager.Instance.m_idCurrentScene != 3) return;
-        Debug.Log(SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected]);
-        Debug.Log(SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].m_buttonAnimator);
-        Debug.Log(SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].m_id);
         SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected].FirstSelected();
-        
         SetPos();
         
         if (m_masterPlayerController.m_id == 1)
@@ -96,13 +93,17 @@ public class SelecterController : UIManager
         SponsorButton button = SponsorMenu.m_sponsorButtonList[m_lineButtonSelected][m_rowButtonSelected];
         if (m_firstSponsor > -1 && m_secondSponsor < 0)
         {
-            m_secondSponsor = button.m_id;
+            int bId = button.m_id;
+            if (bId == 100) bId = Random.Range(0, DataManager.Instance.m_listAllSponsor.Count);
+            m_secondSponsor = bId;
             SponsorManager.Instance.SetSecondSponsor(m_masterPlayerController.m_id, button.m_sprite);
             SponsorManager.Instance.AnimWait(m_masterPlayerController.m_id);
         }
         else if (m_firstSponsor < 0)
         {
-            m_firstSponsor = button.m_id;
+            int bId = button.m_id;
+            if (bId == 100) bId = Random.Range(0, DataManager.Instance.m_listAllSponsor.Count);
+            m_firstSponsor = bId;
             SponsorManager.Instance.SetFirstSponsor(m_masterPlayerController.m_id, button.m_sprite);
             SponsorManager.Instance.AnimSecond(m_masterPlayerController.m_id);
         }

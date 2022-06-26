@@ -150,8 +150,6 @@ public class PlayerInteraction : MonoBehaviour
     /// <returns></returns>
     private bool VerifyIfBall(GameObject go)
     {
-        Debug.Log("Verifier si le game manager est en play");
-
         //Si c'est un autre balle qui arrive
         if (m_currentBall != null && go == m_currentBall.gameObject) return false;
 

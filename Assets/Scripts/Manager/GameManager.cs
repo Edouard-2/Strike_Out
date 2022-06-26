@@ -167,6 +167,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Win(MasterPlayerController player)
     {
+        player.m_playerManager.m_goal.ExplosionGoal();
         //Switch Controller
         SceneManager.Instance.AblePlayerInput(true);
         DataManager.Instance.m_masterPlayerList.ForEach(p => {

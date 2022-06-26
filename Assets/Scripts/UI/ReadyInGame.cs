@@ -15,7 +15,6 @@ public class ReadyInGame : MonoBehaviour
     
     public void StartButton()
     {
-        Debug.Log("StartButton");
         SoundManager.Instance.PlayUIButtonPress();
         m_animatorList?.ForEach(a => a?.SetTrigger(m_pressedAnimation));
     }

@@ -41,11 +41,16 @@ public class Goal : MonoBehaviour
     private void AddScore()
     {
         SoundManager.Instance.PlayGoalExplosion();
-        GameObject go = Instantiate(m_explosion, transform.position, Quaternion.identity);
+        GameObject go = ExplosionGoal();
         Destroy(go,1f);
         UpdateSprite();
         GameManager.Instance.RespawnBall(m_spawnEnnemie);
         
+    }
+
+    public GameObject ExplosionGoal()
+    {
+        return Instantiate(m_explosion, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D col)

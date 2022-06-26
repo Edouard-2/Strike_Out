@@ -100,7 +100,6 @@ public class BallController : MonoBehaviour
     /// <param name="isZoom"> size zoom </param>
     private void ZoomCamera(float zoom,float durationZoom)
     {
-        Debug.Log("Zoom");
         if (m_coroutineZoom != null) StopCoroutine(m_coroutineZoom);
 
         m_coroutineZoom = StartCoroutine(ZoomTrans(zoom, durationZoom));
