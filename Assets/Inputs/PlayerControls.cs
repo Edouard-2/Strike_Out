@@ -177,6 +177,42 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Stick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e03f99d8-5162-4b6c-a012-bf21207095ef"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Stick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""44d9133a-754d-479d-8967-a656700de813"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Shoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""730d8826-c50b-4569-8a54-1f09d7e7e2be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right Shoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7718579-dc1b-4225-80d4-e5b0fb1505f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -311,6 +347,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a47afcc-3c9d-4079-850e-a4fee6d20dbd"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30c476e6-658d-4039-813e-4dbb34307da3"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c978067-fad5-4f2d-83cc-7f84aaee86ea"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Shoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""009a1716-251f-4fb8-b035-60b02f13b592"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Shoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -332,6 +412,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_UI_Down = m_UI.FindAction("Down", throwIfNotFound: true);
         m_UI_Left = m_UI.FindAction("Left", throwIfNotFound: true);
         m_UI_Right = m_UI.FindAction("Right", throwIfNotFound: true);
+        m_UI_LeftStick = m_UI.FindAction("Left Stick", throwIfNotFound: true);
+        m_UI_RightStick = m_UI.FindAction("Right Stick", throwIfNotFound: true);
+        m_UI_LeftShoulder = m_UI.FindAction("Left Shoulder", throwIfNotFound: true);
+        m_UI_RightShoulder = m_UI.FindAction("Right Shoulder", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -448,6 +532,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Down;
     private readonly InputAction m_UI_Left;
     private readonly InputAction m_UI_Right;
+    private readonly InputAction m_UI_LeftStick;
+    private readonly InputAction m_UI_RightStick;
+    private readonly InputAction m_UI_LeftShoulder;
+    private readonly InputAction m_UI_RightShoulder;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -460,6 +548,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Down => m_Wrapper.m_UI_Down;
         public InputAction @Left => m_Wrapper.m_UI_Left;
         public InputAction @Right => m_Wrapper.m_UI_Right;
+        public InputAction @LeftStick => m_Wrapper.m_UI_LeftStick;
+        public InputAction @RightStick => m_Wrapper.m_UI_RightStick;
+        public InputAction @LeftShoulder => m_Wrapper.m_UI_LeftShoulder;
+        public InputAction @RightShoulder => m_Wrapper.m_UI_RightShoulder;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -493,6 +585,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Right.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
                 @Right.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
                 @Right.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
+                @LeftStick.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftStick;
+                @LeftStick.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftStick;
+                @LeftStick.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftStick;
+                @RightStick.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRightStick;
+                @RightStick.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRightStick;
+                @RightStick.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRightStick;
+                @LeftShoulder.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftShoulder;
+                @LeftShoulder.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftShoulder;
+                @LeftShoulder.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftShoulder;
+                @RightShoulder.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRightShoulder;
+                @RightShoulder.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRightShoulder;
+                @RightShoulder.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRightShoulder;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -521,6 +625,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Right.started += instance.OnRight;
                 @Right.performed += instance.OnRight;
                 @Right.canceled += instance.OnRight;
+                @LeftStick.started += instance.OnLeftStick;
+                @LeftStick.performed += instance.OnLeftStick;
+                @LeftStick.canceled += instance.OnLeftStick;
+                @RightStick.started += instance.OnRightStick;
+                @RightStick.performed += instance.OnRightStick;
+                @RightStick.canceled += instance.OnRightStick;
+                @LeftShoulder.started += instance.OnLeftShoulder;
+                @LeftShoulder.performed += instance.OnLeftShoulder;
+                @LeftShoulder.canceled += instance.OnLeftShoulder;
+                @RightShoulder.started += instance.OnRightShoulder;
+                @RightShoulder.performed += instance.OnRightShoulder;
+                @RightShoulder.canceled += instance.OnRightShoulder;
             }
         }
     }
@@ -541,5 +657,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDown(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+        void OnLeftStick(InputAction.CallbackContext context);
+        void OnRightStick(InputAction.CallbackContext context);
+        void OnLeftShoulder(InputAction.CallbackContext context);
+        void OnRightShoulder(InputAction.CallbackContext context);
     }
 }

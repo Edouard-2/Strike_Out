@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     {
         Uninit();
     }
+    
     protected void Init()
     {
         m_playerInput.currentActionMap["Select"].started += Select_Started;
